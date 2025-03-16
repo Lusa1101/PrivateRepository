@@ -80,12 +80,95 @@
 
             </StackLayout>
 
-            <StackLayout IsVisible="False">
+            <StackLayout IsVisible="{Binding LoginLayout}" Padding="30" Spacing="7">
+                <StackLayout.Resources>
+                    <Style TargetType="Label">
+                        <Setter Property="FontSize" Value="15"/>
+                    </Style>
+                    <Style TargetType="Entry">
+                        <Setter Property="PlaceholderColor" Value="Black"/>
+                    </Style>
+                </StackLayout.Resources>
+                
+                <Entry Placeholder="Email" Text="{Binding Text6}"/>
+                <Label Text="{Binding Check6}"/>
 
+                <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True"/>
+                <Label Text="{Binding PasswordCheck}"/>
+
+                <Button Text="Login" Command="{Binding LoginCommand}"/>
             </StackLayout>
 
-            <StackLayout IsVisible="False">
+            <StackLayout IsVisible="{Binding TenantLayout}" Spacing="20" Padding="10">
+                <Label Text="Tenants"/>
 
+                <HorizontalStackLayout HorizontalOptions="CenterAndExpand" Spacing="20">
+                    <Entry Placeholder="Tenant Name" Text="{Binding TenantName}" PlaceholderColor="Black" BackgroundColor="WhiteSmoke"/>
+                    <Picker BackgroundColor="WhiteSmoke" ItemsSource="{Binding Plans}" SelectedItem="{Binding SelectedPlan}"/>
+                    <Button Text="Add" Command="{Binding AddTenantCommand}"/>
+                </HorizontalStackLayout>
+
+                <CollectionView ItemsSource="{Binding Tenants}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItem Text="Delete" BackgroundColor="OrangeRed"/>
+                                </SwipeView.RightItems>
+                                <Frame>
+                                    <HorizontalStackLayout Spacing="10">
+                                        <Label Text="{Binding Tenant_id}"/>
+                                        <Label Text="{Binding Tenant_name}"/>
+                                        <Label Text="{Binding Subscription_plan}"/>
+                                    </HorizontalStackLayout>
+                                </Frame>
+                            </SwipeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+
+            <StackLayout IsVisible="{Binding VmLayout}" Spacing="20" Padding="10">
+                <Label Text="Virtual Machines"/>
+
+                <Grid ColumnDefinitions="*, *, *" RowDefinitions="*, *, *, *" ColumnSpacing="5" RowSpacing="5">
+                    <Grid.Resources>
+                        <Style TargetType="Entry">
+                            <Setter Property="PlaceholderColor" Value="Black"/>
+                        </Style>
+                        <Style TargetType="Label">
+                            <Setter Property="FontSize" Value="Small"/>
+                        </Style>
+                    </Grid.Resources>
+                    <Picker ItemsSource="{Binding OsTypes}" SelectedItem="{Binding SelectedOSType}" BackgroundColor="WhiteSmoke"
+                            Grid.ColumnSpan="3" Grid.Row="0"/>
+                    <Entry Placeholder="Name" Text="{Binding Name}" Grid.Column="0" Grid.Row="1"/>
+                    <Entry Placeholder="Memory size" Text="{Binding Memory}" Grid.Column="1" Grid.Row="1"/>
+                    <Entry Placeholder="Number of CPUs" Text="{Binding Cpus}" Grid.Row="1" Grid.Column="2"/>
+                    <Label Text="{Binding Check2}" Grid.Row="2" Grid.ColumnSpan="3" HorizontalOptions="Center"/>
+
+                    <Button Text="Add" Command="{Binding AddVMCommand}" Grid.Column="1" Grid.Row="3"/>
+                </Grid>
+
+                <CollectionView ItemsSource="{Binding Machines}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItem Text="Run"/>
+                                    <SwipeItem Text="Delete" BackgroundColor="OrangeRed"/>
+                                </SwipeView.RightItems>
+                                <Frame>
+                                    <Grid RowDefinitions="*, *" ColumnDefinitions="*, *" RowSpacing="5" ColumnSpacing="5">
+                                        <Label Text="{Binding Name, StringFormat='Name: {0}'}" Grid.Column="0" Grid.Row="0"/>
+                                        <Label Text="{Binding OS_type, StringFormat='OS: {0}'}" Grid.Column="1" Grid.Row="0"/>
+                                        <Label Text="{Binding Memory_size, StringFormat='Memory: {0}'}" Grid.Column="1" Grid.Row="1"/>
+                                    </Grid>
+                                </Frame>
+                            </SwipeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
             </StackLayout>
         </VerticalStackLayout>
     </ScrollView>

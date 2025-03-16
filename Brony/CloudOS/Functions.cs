@@ -21,10 +21,10 @@ namespace CloudOS
             return true;
         }
 
-        public bool NumberValidator(string value)
+        public bool NumberValidator(string value, bool isID = false)
         {
             //The number of digits in SA ID
-            if (value.Length != 13)
+            if (isID && value.Length != 13)
                 return false;
 
             foreach (char c in value)
@@ -74,6 +74,38 @@ namespace CloudOS
                 return true;
             else
                 return false;
+        }
+
+        public string PasswordChecker(string value)
+        {
+            string pattern;
+            
+            //Number check
+            pattern = @"\d";
+            if (!Regex.Match(value, pattern).Success)
+                return "Must have at least one number.";
+
+            //Lowercase check
+            pattern = @"[a-z]";
+            if (!Regex.Match(value, pattern).Success)
+                return "Must have at least one lowercase.";
+
+            //Uppercase check
+            pattern = @"[A-Z]";
+            if (!Regex.Match(value, pattern).Success)
+                return "Must have at least one uppercase.";
+
+            //Special characters
+            pattern = @"[^0-9a-zA-Z]";
+            if (!Regex.Match(value, pattern).Success)
+                return "Must have at least one special char like @#$$%.";
+
+            //Length check
+            if (value.Length < 9)
+                return "Length of at least 8 characters.";
+
+
+            return string.Empty;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -24,7 +25,9 @@ namespace CloudOS.ViewModels
         [ObservableProperty]
         bool registerLayout;
         [ObservableProperty]
-        bool login;
+        bool loginLayout;
+        [ObservableProperty]
+        bool tenantLayout;
         [ObservableProperty]
         bool vmLayout;
 
@@ -67,21 +70,121 @@ namespace CloudOS.ViewModels
         //The Registration Command
         public ICommand? RegisterCommand { get; }
 
-        public TenantViewModel() 
+        //Login
+        [ObservableProperty]
+        string? email;
+        [ObservableProperty]
+        string? password;
+
+        //Checker for password
+        [ObservableProperty]
+        string? passwordCheck;
+
+        //ICommand for Login
+        public ICommand LoginCommand { get; }
+
+        //Variables for the Tenants
+        [ObservableProperty]
+        ObservableCollection<string> plans = new ();
+        [ObservableProperty]
+        string? selectedPlan;
+
+        [ObservableProperty]
+        ObservableCollection<Tenant> tenants = new ();
+
+        [ObservableProperty]
+        string? tenantName;
+
+        public ICommand AddTenantCommand { get; }
+
+        //Variables for Virtual Machines
+        [ObservableProperty]
+        ObservableCollection<string> osTypes = new ();
+        [ObservableProperty]
+        string? selectedOSType;
+
+        [ObservableProperty]
+        string? name;
+        [ObservableProperty]
+        string? memory;
+        [ObservableProperty]
+        string? cpus;
+
+        public ICommand AddVMCommand { get; }
+
+        [ObservableProperty]
+        ObservableCollection<Virtual_Machine> machines = new ();
+
+        public TenantViewModel()
         {
             //Set the commands
             RegisterCommand = new Command(Register);
+            LoginCommand = new Command(Login);
+            AddTenantCommand = new Command(AddTenant);
+            AddVMCommand = new Command(AddVM);
 
             //Initial Layout
-            RegisterLayout = true;
+            VmLayout = true;
+
+            //Set plans and tenants
+            Plans = new ObservableCollection<string>() { "Free-tier", "Gold", "Platinum" };
+            Tenants = new ObservableCollection<Tenant>()
+            {
+                new Tenant { Tenant_id = 1, Tenant_name = "Tenant 1", Subscription_plan = Plans[0] },
+                new Tenant { Tenant_id = 2, Subscription_plan = Plans[1], Tenant_name = "Tenant 2" }
+            };
+
+            //Set os_Types and machines
+            OsTypes = new ObservableCollection<string>() { "Ubuntu_64", "Windows_64", "Debian_64", "Redhat_64"};
+            Machines = new ObservableCollection<Virtual_Machine>()
+            {
+                new Virtual_Machine { Name = "VM!", OS_type = OsTypes[0], CPUs=2, Memory_size=2048, UUID="kjcjabu83gei983", Tenant_id=1},
+                new Virtual_Machine { Name = "VM2", OS_type = OsTypes[0], CPUs=2, Memory_size=2048, UUID="kjcjabu83gei93423", Tenant_id=1},
+                new Virtual_Machine { Name = "VM3", OS_type = OsTypes[0], CPUs=2, Memory_size=2048, UUID="kjcjabu83gei3", Tenant_id=2},
+                new Virtual_Machine { Name = "VM2", OS_type = OsTypes[0], CPUs=2, Memory_size=2048, UUID="kjcjabu83mdksgei983", Tenant_id=2}
+            };
+        }
+
+        void AddVM()
+        {
+            Debug.WriteLine("Reached");
+            if (String.IsNullOrEmpty(Name) || String.IsNullOrEmpty(SelectedOSType))
+                return;
+
+            Virtual_Machine vm = new Virtual_Machine();
+            vm.Name = Name;
+            vm.OS_type = SelectedOSType;
+            vm.CPUs = int.Parse(String.IsNullOrEmpty(Cpus)?"-1":Cpus);
+            //We need to get the UUID and tenant_id
+
+        }
+
+        void AddTenant()
+        {
+            if (string.IsNullOrEmpty(TenantName) || string.IsNullOrEmpty(SelectedPlan))
+                return;
+
+            Tenant tenant = new Tenant();
+            tenant.Tenant_name = TenantName;
+            tenant.Subscription_plan = SelectedPlan;
+
+            //Add to the tenants
+            Tenants.Add(tenant);
+        }
+
+        //Login method
+        void Login()
+        {
+            if (!String.IsNullOrEmpty(Check6) || !String.IsNullOrEmpty(PasswordCheck))
+                return;
+
+            Debug.WriteLine("Safe to login");
         }
 
         //Registration method
         void Register()
         {
-            bool cont = false;
-            cont = functions.CheckInput(Check1, Check2, Check3, Check4, Check5, Check6);
-            if (cont)
+            if (functions.CheckInput(Check1, Check2, Check3, Check4, Check5, Check6))
                Debug.WriteLine("All clear to proceed.");
 
             if (PersonalReg)
@@ -143,7 +246,7 @@ namespace CloudOS.ViewModels
 
         partial void OnText3Changed(string? value)
         {
-            if (!String.IsNullOrEmpty(value) && !(functions.NumberValidator(value)))
+            if (!String.IsNullOrEmpty(value) && !(functions.NumberValidator(value, true)))
                 Check3 = "Not a vaild number input.";
             else
                 Check3 = string.Empty;
@@ -171,6 +274,27 @@ namespace CloudOS.ViewModels
                 Check6 = "Not a vaild email input.";
             else
                 Check6 = string.Empty;
+        }
+
+        partial void OnPasswordChanged(string? value)
+        {
+            PasswordCheck = functions.PasswordChecker(value);
+        }
+
+        partial void OnCpusChanged(string? value)
+        {
+            if (!String.IsNullOrEmpty(value) && !functions.NumberValidator(value))
+                Check2 = "Enter valid number of CPUS.";
+            else 
+                Check2 = string.Empty;
+        }
+
+        partial void OnMemoryChanged(string? value)
+        {
+            if (!String.IsNullOrEmpty(value) && !functions.NumberValidator(value))
+                Check2 = "Enter valid number of Memory.";
+            else
+                Check2 = string.Empty;
         }
         /***        End of Input Validation     **/
     }

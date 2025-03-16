@@ -140,7 +140,7 @@ namespace CloudOS
                     {
                         Tenant temp = new();
                         temp.Tenant_id = reader.GetInt32(0);
-                        temp.Subscribtion_plan = reader.GetString(1);
+                        temp.Subscription_plan = reader.GetString(1);
 
                         //Add to the list
                         tenants.Add(temp);

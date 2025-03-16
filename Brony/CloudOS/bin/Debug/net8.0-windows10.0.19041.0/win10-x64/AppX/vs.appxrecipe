@@ -10,14 +10,14 @@
     <PackageArchitecture>x64</PackageArchitecture>
     <PackageIdentityName>com.companyname.cloudos</PackageIdentityName>
     <PackageIdentityPublisher>CN=User Name</PackageIdentityPublisher>
-    <IntermediateOutputPath>C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\</IntermediateOutputPath>
     <RemoteDeploymentType>CopyToDevice</RemoteDeploymentType>
     <PackageRegistrationPath>
     </PackageRegistrationPath>
     <RemoveNonLayoutFiles>false</RemoveNonLayoutFiles>
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
-    <LayoutDir>C:\Users\omphu\Documents\Brony\CloudOS\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\AppX</LayoutDir>
+    <LayoutDir>C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\AppX</LayoutDir>
     <RegisteredManifestChecksum>675B3F45542A3EA4E417197F5A50116333745CC156BF078B79A403057C0D8295</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>com.companyname.cloudos_1.0.0.1_x64__9zz4h110yvjzm</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>com.companyname.cloudos_9zz4h110yvjzm!App</RegisteredUserModeAppID>
@@ -26,268 +26,268 @@
     <RegisteredVersion>1.0.0.1</RegisteredVersion>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="C:\Users\omphu\Documents\Brony\CloudOS\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
+    <AppXManifest Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2025-03-16T16:34:41.190</Modified>
+      <Modified>2025-03-16T20:35:42.222</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\resources.pri">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <Modified>2025-03-14T17:47:50.226</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\CloudOS.runtimeconfig.json">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\CloudOS.runtimeconfig.json">
       <PackagePath>CloudOS.runtimeconfig.json</PackagePath>
-      <Modified>2025-03-14T17:47:49.881</Modified>
+      <Modified>2025-03-16T17:28:08.159</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\CloudOS.dll">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\CloudOS.dll">
       <PackagePath>CloudOS.dll</PackagePath>
-      <Modified>2025-03-16T16:34:40.525</Modified>
+      <Modified>2025-03-16T20:35:41.475</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\apphost.exe">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>CloudOS.exe</PackagePath>
-      <Modified>2025-03-16T16:34:40.542</Modified>
+      <Modified>2025-03-16T20:35:41.490</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\Resources\Raw\AboutAssets.txt">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\Resources\Raw\AboutAssets.txt">
       <PackagePath>AboutAssets.txt</PackagePath>
       <Modified>2025-03-14T13:45:06.595</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-100.png">
       <PackagePath>splashSplashScreen.scale-100.png</PackagePath>
       <Modified>2025-03-14T13:45:47.311</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-125.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-125.png">
       <PackagePath>splashSplashScreen.scale-125.png</PackagePath>
       <Modified>2025-03-14T13:45:47.351</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-150.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-150.png">
       <PackagePath>splashSplashScreen.scale-150.png</PackagePath>
       <Modified>2025-03-14T13:45:47.407</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-200.png">
       <PackagePath>splashSplashScreen.scale-200.png</PackagePath>
       <Modified>2025-03-14T13:45:47.478</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-400.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-400.png">
       <PackagePath>splashSplashScreen.scale-400.png</PackagePath>
       <Modified>2025-03-14T13:45:47.905</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\f\OpenSans-Regular.ttf">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\f\OpenSans-Regular.ttf">
       <PackagePath>OpenSans-Regular.ttf</PackagePath>
       <Modified>2025-03-14T13:45:06.583</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\f\OpenSans-Semibold.ttf">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\f\OpenSans-Semibold.ttf">
       <PackagePath>OpenSans-Semibold.ttf</PackagePath>
       <Modified>2025-03-14T13:45:06.586</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appicon.ico">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appicon.ico">
       <PackagePath>appicon.ico</PackagePath>
-      <Modified>2025-03-14T14:10:16.484</Modified>
+      <Modified>2025-03-16T17:09:03.017</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-100.png">
       <PackagePath>appiconLargeTile.scale-100.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.442</Modified>
+      <Modified>2025-03-16T17:09:02.839</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-125.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-125.png">
       <PackagePath>appiconLargeTile.scale-125.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.442</Modified>
+      <Modified>2025-03-16T17:09:02.839</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-150.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-150.png">
       <PackagePath>appiconLargeTile.scale-150.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.417</Modified>
+      <Modified>2025-03-16T17:09:02.839</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-200.png">
       <PackagePath>appiconLargeTile.scale-200.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.414</Modified>
+      <Modified>2025-03-16T17:09:02.839</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-400.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-400.png">
       <PackagePath>appiconLargeTile.scale-400.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.414</Modified>
+      <Modified>2025-03-16T17:09:02.839</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-16.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-16.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-16.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.474</Modified>
+      <Modified>2025-03-16T17:09:02.921</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-24.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-24.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-24.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.472</Modified>
+      <Modified>2025-03-16T17:09:02.904</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-256.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-256.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-256.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.465</Modified>
+      <Modified>2025-03-16T17:09:02.900</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-32.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-32.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-32.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.467</Modified>
+      <Modified>2025-03-16T17:09:02.901</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-48.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-48.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-48.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.465</Modified>
+      <Modified>2025-03-16T17:09:02.900</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-16.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-16.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-16.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.476</Modified>
+      <Modified>2025-03-16T17:09:02.958</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-24.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-24.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-24.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.474</Modified>
+      <Modified>2025-03-16T17:09:02.957</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-256.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-256.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-256.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.474</Modified>
+      <Modified>2025-03-16T17:09:02.951</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-32.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-32.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-32.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.474</Modified>
+      <Modified>2025-03-16T17:09:02.956</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-48.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-48.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-48.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.474</Modified>
+      <Modified>2025-03-16T17:09:02.954</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-100.png">
       <PackagePath>appiconLogo.scale-100.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.484</Modified>
+      <Modified>2025-03-16T17:09:03.017</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-125.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-125.png">
       <PackagePath>appiconLogo.scale-125.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.484</Modified>
+      <Modified>2025-03-16T17:09:03.015</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-150.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-150.png">
       <PackagePath>appiconLogo.scale-150.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.484</Modified>
+      <Modified>2025-03-16T17:09:03.005</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-200.png">
       <PackagePath>appiconLogo.scale-200.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.481</Modified>
+      <Modified>2025-03-16T17:09:02.998</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-400.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-400.png">
       <PackagePath>appiconLogo.scale-400.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.481</Modified>
+      <Modified>2025-03-16T17:09:02.992</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-16.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-16.png">
       <PackagePath>appiconLogo.targetsize-16.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.481</Modified>
+      <Modified>2025-03-16T17:09:02.981</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-24.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-24.png">
       <PackagePath>appiconLogo.targetsize-24.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.481</Modified>
+      <Modified>2025-03-16T17:09:02.981</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-256.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-256.png">
       <PackagePath>appiconLogo.targetsize-256.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.479</Modified>
+      <Modified>2025-03-16T17:09:02.959</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-32.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-32.png">
       <PackagePath>appiconLogo.targetsize-32.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.479</Modified>
+      <Modified>2025-03-16T17:09:02.981</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-48.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-48.png">
       <PackagePath>appiconLogo.targetsize-48.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.479</Modified>
+      <Modified>2025-03-16T17:09:02.959</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-100.png">
       <PackagePath>appiconMediumTile.scale-100.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.447</Modified>
+      <Modified>2025-03-16T17:09:02.852</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-125.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-125.png">
       <PackagePath>appiconMediumTile.scale-125.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.447</Modified>
+      <Modified>2025-03-16T17:09:02.847</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-150.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-150.png">
       <PackagePath>appiconMediumTile.scale-150.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.447</Modified>
+      <Modified>2025-03-16T17:09:02.844</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-200.png">
       <PackagePath>appiconMediumTile.scale-200.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.446</Modified>
+      <Modified>2025-03-16T17:09:02.844</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-400.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-400.png">
       <PackagePath>appiconMediumTile.scale-400.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.446</Modified>
+      <Modified>2025-03-16T17:09:02.844</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-100.png">
       <PackagePath>appiconSmallTile.scale-100.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.451</Modified>
+      <Modified>2025-03-16T17:09:02.875</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-125.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-125.png">
       <PackagePath>appiconSmallTile.scale-125.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.451</Modified>
+      <Modified>2025-03-16T17:09:02.872</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-150.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-150.png">
       <PackagePath>appiconSmallTile.scale-150.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.451</Modified>
+      <Modified>2025-03-16T17:09:02.859</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-200.png">
       <PackagePath>appiconSmallTile.scale-200.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.449</Modified>
+      <Modified>2025-03-16T17:09:02.859</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-400.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-400.png">
       <PackagePath>appiconSmallTile.scale-400.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.447</Modified>
+      <Modified>2025-03-16T17:09:02.854</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-100.png">
       <PackagePath>appiconStoreLogo.scale-100.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.461</Modified>
+      <Modified>2025-03-16T17:09:02.885</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-125.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-125.png">
       <PackagePath>appiconStoreLogo.scale-125.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.461</Modified>
+      <Modified>2025-03-16T17:09:02.881</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-150.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-150.png">
       <PackagePath>appiconStoreLogo.scale-150.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.461</Modified>
+      <Modified>2025-03-16T17:09:02.881</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-200.png">
       <PackagePath>appiconStoreLogo.scale-200.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.461</Modified>
+      <Modified>2025-03-16T17:09:02.876</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-400.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-400.png">
       <PackagePath>appiconStoreLogo.scale-400.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.460</Modified>
+      <Modified>2025-03-16T17:09:02.876</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-100.png">
       <PackagePath>appiconWideTile.scale-100.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.446</Modified>
+      <Modified>2025-03-16T17:09:02.844</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-125.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-125.png">
       <PackagePath>appiconWideTile.scale-125.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.442</Modified>
+      <Modified>2025-03-16T17:09:02.844</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-150.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-150.png">
       <PackagePath>appiconWideTile.scale-150.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.442</Modified>
+      <Modified>2025-03-16T17:09:02.839</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-200.png">
       <PackagePath>appiconWideTile.scale-200.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.442</Modified>
+      <Modified>2025-03-16T17:09:02.839</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-400.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-400.png">
       <PackagePath>appiconWideTile.scale-400.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.442</Modified>
+      <Modified>2025-03-16T17:09:02.839</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-100.png">
       <PackagePath>dotnet_bot.scale-100.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.414</Modified>
+      <Modified>2025-03-16T17:09:02.839</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-125.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-125.png">
       <PackagePath>dotnet_bot.scale-125.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.414</Modified>
+      <Modified>2025-03-16T17:09:02.839</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-150.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-150.png">
       <PackagePath>dotnet_bot.scale-150.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.414</Modified>
+      <Modified>2025-03-16T17:09:02.839</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-200.png">
       <PackagePath>dotnet_bot.scale-200.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.414</Modified>
+      <Modified>2025-03-16T17:09:02.839</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-400.png">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-400.png">
       <PackagePath>dotnet_bot.scale-400.png</PackagePath>
-      <Modified>2025-03-14T14:10:16.414</Modified>
+      <Modified>2025-03-16T17:09:02.839</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\CloudOS\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\CloudOS.deps.json">
+    <AppxPackagedFile Include="C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\CloudOS.deps.json">
       <PackagePath>CloudOS.deps.json</PackagePath>
-      <Modified>2025-03-14T17:47:49.676</Modified>
+      <Modified>2025-03-16T17:28:07.970</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\omphu\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.19041.31\lib\net6.0\Microsoft.Windows.SDK.NET.dll">
       <PackagePath>Microsoft.Windows.SDK.NET.dll</PackagePath>

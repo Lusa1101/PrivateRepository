@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\omphu\\Documents\\Brony\\CloudOS\\CloudOS.csproj": {}
+    "C:\\Users\\omphu\\Documents\\PrivateRepository\\Brony\\CloudOS\\CloudOS.csproj": {}
   },
   "projects": {
-    "C:\\Users\\omphu\\Documents\\Brony\\CloudOS\\CloudOS.csproj": {
+    "C:\\Users\\omphu\\Documents\\PrivateRepository\\Brony\\CloudOS\\CloudOS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\omphu\\Documents\\Brony\\CloudOS\\CloudOS.csproj",
+        "projectUniqueName": "C:\\Users\\omphu\\Documents\\PrivateRepository\\Brony\\CloudOS\\CloudOS.csproj",
         "projectName": "CloudOS",
-        "projectPath": "C:\\Users\\omphu\\Documents\\Brony\\CloudOS\\CloudOS.csproj",
+        "projectPath": "C:\\Users\\omphu\\Documents\\PrivateRepository\\Brony\\CloudOS\\CloudOS.csproj",
         "packagesPath": "C:\\Users\\omphu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\omphu\\Documents\\Brony\\CloudOS\\obj\\",
+        "outputPath": "C:\\Users\\omphu\\Documents\\PrivateRepository\\Brony\\CloudOS\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "fallbackFolders": [

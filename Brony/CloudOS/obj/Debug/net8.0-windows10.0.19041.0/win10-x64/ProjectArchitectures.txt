@@ -1,1 +1,1 @@
-C:\Users\omphu\Documents\Brony\CloudOS\CloudOS.csproj;x64
+C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\CloudOS.csproj;x64

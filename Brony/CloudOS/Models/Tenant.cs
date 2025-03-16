@@ -9,7 +9,8 @@ namespace CloudOS.Models
     internal class Tenant
     {
         public int Tenant_id { get; set; }
-        public string? Subscribtion_plan { get; set; }
+        public string? Tenant_name { get; set; }
+        public string? Subscription_plan { get; set; }
 
         public DateOnly DateCreated { get; set; }
     }
