@@ -1,0 +1,1 @@
+C:\Users\omphu\Documents\Brony\CloudOS\CloudOS.csproj;x64

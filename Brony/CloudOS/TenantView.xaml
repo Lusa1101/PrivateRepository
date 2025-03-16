@@ -1,0 +1,93 @@
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:CloudOS"
+             xmlns:vm="clr-namespace:CloudOS.ViewModels"
+             x:Class="CloudOS.TenantView">
+
+    <ContentView.BindingContext>
+        <vm:TenantViewModel/>
+    </ContentView.BindingContext>
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Entry" x:Key="loginEntry">
+                <Setter Property="PlaceholderColor" Value="Black"/>
+                <Setter Property="BackgroundColor" Value="AliceBlue"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout>
+            <StackLayout IsVisible="{Binding RegisterLayout}" Spacing="10" Padding="20">
+                <Label Text="Registration" FontSize="Medium" HorizontalOptions="Center"/>
+
+                <HorizontalStackLayout Padding="10" Spacing="15">
+                    <RadioButton Content="Personal" GroupName="Type" IsChecked="{Binding PersonalReg}"/>
+                    <RadioButton Content="Company" GroupName="Type" IsChecked="{Binding CompanyReg}"/>
+                </HorizontalStackLayout>
+
+                <StackLayout IsVisible="{Binding PersonalReg}" Spacing="10" Padding="10">
+                    <StackLayout.Resources>
+                        <Style TargetType="Entry" BasedOn="{StaticResource loginEntry}"/>
+                    </StackLayout.Resources>
+                    <Entry Placeholder="Names" Text="{Binding Text1}"/>
+                    <Label Text="{Binding Check1}"/>
+                    
+                    <Entry Placeholder="Surname" Text="{Binding Text2}"/>
+                    <Label Text="{Binding Check2}"/>
+
+                    <Entry Placeholder="ID number" Text="{Binding Text3}"/>
+                    <Label Text="{Binding Check3}"/>
+                    
+                    <Entry Placeholder="Address" Text="{Binding Text4}"/>
+                    <Label Text="{Binding Check4}"/>
+                    
+                    <Entry Placeholder="Cell" Text="{Binding Text5}"/>
+                    <Label Text="{Binding Check5}"/>
+                    
+                    <Entry Placeholder="Email address" Text="{Binding Text6}"/>
+                    <Label Text="{Binding Check6}"/>
+
+                    <Entry Placeholder="Password" Text="{Binding Password}"/>
+                    <Label Text="{Binding PasswordCheck}"/>
+                </StackLayout>
+                <StackLayout IsVisible="{Binding CompanyReg}" Spacing="10" Padding="10">
+                    <StackLayout.Resources>
+                        <Style TargetType="Entry" BasedOn="{StaticResource loginEntry}"/>
+                    </StackLayout.Resources>
+                    
+                    <Entry Placeholder="Name" Text="{Binding Text1}"/>
+                    <Label Text="{Binding Check1}"/>
+                    
+                    <Entry Placeholder="Registration Number" Text="{Binding Text2}"/>
+                    <Label Text="{Binding Check2}"/>
+                    
+                    <Entry Placeholder="Tax Number" Text="{Binding Text3}"/>
+                    <Label Text="{Binding Check3}"/>
+                    
+                    <Entry Placeholder="Address" Text="{Binding Text4}"/>
+                    <Label Text="{Binding Check4}"/>
+                    
+                    <Entry Placeholder="Cell" Text="{Binding Text5}"/>
+                    <Label Text="{Binding Check5}"/>
+                    
+                    <Entry Placeholder="Email address" Text="{Binding Text6}"/>
+                    <Label Text="{Binding Check6}"/>
+                </StackLayout>
+
+                <Button Text="Register" Command="{Binding RegisterCommand}"/>
+
+            </StackLayout>
+
+            <StackLayout IsVisible="False">
+
+            </StackLayout>
+
+            <StackLayout IsVisible="False">
+
+            </StackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentView>

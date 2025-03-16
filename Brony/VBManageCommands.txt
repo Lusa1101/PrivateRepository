@@ -1,0 +1,23 @@
+1. NIC1 to Bridged Adapter
+	* Connects the VM directly to the host's network.
+	* VBoxManage modifyvm "VM_Name" --nic1 bridged --bridgeadapter1 "Adapter_Name"
+	* Replace "Adapter_Name" with the name of your host's network adapter (e.g., eth0 or Wi-Fi)
+
+2. Set NIC1 to NAT
+	* Enables internet access by sharing the host's IP address, ideal for isolation.
+	* VBoxManage modifyvm "VM_Name" --nic1 nat
+
+3. Set NIC1 to Host-Only Adapter
+	* Creates a private network between the host and VM, used for secure communication.
+	* VBoxManage modifyvm "VM_Name" --nic1 hostonly --hostonlyadapter1 "vboxnet0".
+	* Replace "vboxnet0" with the name of the host-only network adapter.
+
+4. Set NIC1 to Internal Network
+	* To allow communication only between VMs on the same host
+	* VBoxManage modifyvm "VM_Name" --nic1 intnet --intnet1 "Internal_Network_Name"
+	* Replace "Internal_Network_Name" with the name of the internal network.
+
+5. Set NIC1 to NAT Network
+	* To share the host's IP with multiple VMs in a private network.
+	* VBoxManage modifyvm "VM_Name" --nic1 natnetwork --nat-network1 "NAT_Network_Name".
+	* Replace "NAT_Network_Name" with the name of the NAT network.

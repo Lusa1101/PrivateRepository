@@ -1,0 +1,56 @@
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:CloudOS"
+             xmlns:vm="clr-namespace:CloudOS.ViewModels"
+             x:Class="CloudOS.AdminView">
+
+    <ContentView.BindingContext>
+        <vm:AdminViewModel/>
+    </ContentView.BindingContext>
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Entry" x:Key="loginEntry">
+                <Setter Property="PlaceholderColor" Value="Black"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <VerticalStackLayout Padding="30.0" Spacing="20">
+        
+        <StackLayout Padding="10" Spacing="10" IsVisible="{Binding LoginLayout}">
+            <Entry Placeholder="Username" Text="{Binding Username}" Style="{StaticResource loginEntry}"/>
+            <Entry Placeholder="Password" Text="{Binding Password}"  Style="{StaticResource loginEntry}"/>
+            <Button Text="Login" Command="{Binding LoginCommand}"/>
+        </StackLayout>
+
+        <Frame IsVisible="{Binding HomeLayout}">
+            <StackLayout  Padding="5" Spacing="5" RadioButtonGroup.GroupName="layouts">
+                <RadioButton Content="Tenant Management" IsChecked="{Binding TenantLayout}"/>
+                <RadioButton Content="Resource Management"/>
+                <RadioButton Content="VM Monitoring" IsChecked="{Binding VmLayout}"/>
+                <RadioButton Content="Log out" IsChecked="{Binding LoginLayout}"/>
+            </StackLayout>
+        </Frame>
+
+        <StackLayout IsVisible="{Binding TenantLayout}" Spacing="20">
+            <Label Text="Tenant Management"/>
+
+            <Picker ItemsSource="{Binding Options}" SelectedItem="{Binding SelectedOption}" BackgroundColor="AliceBlue"/>
+
+            <CollectionView ItemsSource="{Binding List}" ItemTemplate="{Binding DataTemplat}">
+                <CollectionView.Header>
+                    <DataTemplate>
+                        <TextCell Text="Tenant registration approval"/>
+                    </DataTemplate>
+                </CollectionView.Header>
+            </CollectionView>
+        </StackLayout>
+        
+        <StackLayout IsVisible="{Binding VmLayout}">
+
+        </StackLayout>
+        
+    </VerticalStackLayout>
+
+</ContentView>

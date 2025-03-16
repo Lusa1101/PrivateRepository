@@ -1,0 +1,56 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:CloudOS"
+             x:Class="CloudOS.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate x:Key="clientDT">
+                <SwipeView>
+                    <SwipeView.LeftItems>
+                        <SwipeItem Text="Decline" BackgroundColor="OrangeRed"/>
+                    </SwipeView.LeftItems>
+                    <SwipeView.RightItems>
+                        <SwipeItem Text="Approve" BackgroundColor="LightGreen"/>
+                    </SwipeView.RightItems>
+                    <Frame>
+                        <Grid ColumnDefinitions="1.75*, *, *">
+                            <Label Text="{Binding Name}" Grid.Column="0"/>
+                            <Label Text="{Binding Type}" Grid.Column="1"/>
+                            <Label Text="{Binding Address}" Grid.Column="2"/>
+                        </Grid>
+                    </Frame>
+                </SwipeView>
+            </DataTemplate>
+            <DataTemplate x:Key="tenantDT">
+                <Frame>
+                    <Grid ColumnDefinitions="*, *, *" RowDefinitions="*, *">
+                        <Label Text="{Binding Tenant_id, StringFormat='Tenant id: {0}'}" Grid.Column="0" Grid.Row="0"/>
+                        <Label Text="{Binding Name, StringFormat='Name: {0}'}" Grid.Column="1" Grid.Row="0"/>
+                        <Label Text="{Binding Tenant_type, StringFormat='Tenant type: {0}'}" Grid.Column="2" Grid.Row="0"/>
+                        <Label Text="{Binding Address, StringFormat='Address: {0}'}" Grid.Column="0" Grid.Row="1"/>
+                        <Label Text="{Binding Subscription_plan, StringFormat='Subscription: {0}'}" Grid.Column="1" Grid.Row="1"/>
+                    </Grid>
+                </Frame>
+            </DataTemplate>
+            <DataTemplate x:Key="vmDT">
+                <Frame>
+                    <Grid ColumnDefinitions="*, *, *, *, *" RowDefinitions="*, *" ColumnSpacing="5">
+                        <Label Text="{Binding Tenant_id, StringFormat='Tenant id: {0}'}" Grid.Column="0" Grid.Row="0"/>
+                        <Label Text="{Binding Name, StringFormat='Names: {0}'}" Grid.Column="1" Grid.Row="0"/>
+                        <Label Text="{Binding Subscription_plan, StringFormat='Subscription: {0}'}" Grid.Column="2" Grid.Row="0"/>
+                        <Label Text="{Binding VM_names, StringFormat='VM Names: {0}'}" Grid.Column="0" Grid.Row="1"/>
+                        <Label Text="{Binding OS_type, StringFormat='OS Type: {0}'}" Grid.Column="1" Grid.Row="1"/>
+                        <Label Text="{Binding Memory_size, StringFormat='Memory Size: {0}'}" Grid.Column="2" Grid.Row="1"/>
+                        <Label Text="{Binding Cpus, StringFormat='CPUs: {0}'}" Grid.Column="3" Grid.Row="1"/>
+                    </Grid>
+                </Frame>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
