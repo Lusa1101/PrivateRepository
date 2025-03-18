@@ -4,28 +4,32 @@
              xmlns:vm="clr-namespace:CloudOS.ViewModels"
              x:Class="CloudOS.TenantView">
 
-    <ContentView.BindingContext>
-        <vm:TenantViewModel/>
-    </ContentView.BindingContext>
-
     <ContentView.Resources>
         <ResourceDictionary>
             <Style TargetType="Entry" x:Key="loginEntry">
                 <Setter Property="PlaceholderColor" Value="Black"/>
                 <Setter Property="BackgroundColor" Value="AliceBlue"/>
             </Style>
+            <Array x:Key="PickerItems" Type="{x:Type x:String}">
+                <x:String>Register</x:String>
+                <x:String>Login</x:String>
+                <x:String>Tenants</x:String>
+                <x:String>Virtual Machines</x:String>
+            </Array>
+            <Array x:Key="TypePickerItems" Type="{x:Type x:String}">
+                <x:String>Personal</x:String>
+                <x:String>Company</x:String>
+            </Array>
         </ResourceDictionary>
     </ContentView.Resources>
 
     <ScrollView>
-        <VerticalStackLayout>
+        <VerticalStackLayout Spacing="10" Padding="10">
+            <Picker ItemsSource="{StaticResource PickerItems}" SelectedItem="{Binding SelectedOption}"/>
             <StackLayout IsVisible="{Binding RegisterLayout}" Spacing="10" Padding="20">
                 <Label Text="Registration" FontSize="Medium" HorizontalOptions="Center"/>
 
-                <HorizontalStackLayout Padding="10" Spacing="15">
-                    <RadioButton Content="Personal" GroupName="Type" IsChecked="{Binding PersonalReg}"/>
-                    <RadioButton Content="Company" GroupName="Type" IsChecked="{Binding CompanyReg}"/>
-                </HorizontalStackLayout>
+                <Picker ItemsSource="{StaticResource TypePickerItems}" SelectedItem="{Binding CompanyType}"/>
 
                 <StackLayout IsVisible="{Binding PersonalReg}" Spacing="10" Padding="10">
                     <StackLayout.Resources>
@@ -33,47 +37,51 @@
                     </StackLayout.Resources>
                     <Entry Placeholder="Names" Text="{Binding Text1}"/>
                     <Label Text="{Binding Check1}"/>
-                    
+
                     <Entry Placeholder="Surname" Text="{Binding Text2}"/>
                     <Label Text="{Binding Check2}"/>
 
                     <Entry Placeholder="ID number" Text="{Binding Text3}"/>
                     <Label Text="{Binding Check3}"/>
-                    
+
                     <Entry Placeholder="Address" Text="{Binding Text4}"/>
                     <Label Text="{Binding Check4}"/>
-                    
+
                     <Entry Placeholder="Cell" Text="{Binding Text5}"/>
                     <Label Text="{Binding Check5}"/>
-                    
+
                     <Entry Placeholder="Email address" Text="{Binding Text6}"/>
                     <Label Text="{Binding Check6}"/>
 
-                    <Entry Placeholder="Password" Text="{Binding Password}"/>
+                    <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="true"/>
                     <Label Text="{Binding PasswordCheck}"/>
                 </StackLayout>
+
                 <StackLayout IsVisible="{Binding CompanyReg}" Spacing="10" Padding="10">
                     <StackLayout.Resources>
                         <Style TargetType="Entry" BasedOn="{StaticResource loginEntry}"/>
                     </StackLayout.Resources>
-                    
+
                     <Entry Placeholder="Name" Text="{Binding Text1}"/>
                     <Label Text="{Binding Check1}"/>
-                    
+
                     <Entry Placeholder="Registration Number" Text="{Binding Text2}"/>
                     <Label Text="{Binding Check2}"/>
-                    
+
                     <Entry Placeholder="Tax Number" Text="{Binding Text3}"/>
                     <Label Text="{Binding Check3}"/>
-                    
+
                     <Entry Placeholder="Address" Text="{Binding Text4}"/>
                     <Label Text="{Binding Check4}"/>
-                    
+
                     <Entry Placeholder="Cell" Text="{Binding Text5}"/>
                     <Label Text="{Binding Check5}"/>
-                    
+
                     <Entry Placeholder="Email address" Text="{Binding Text6}"/>
                     <Label Text="{Binding Check6}"/>
+
+                    <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="true"/>
+                    <Label Text="{Binding PasswordCheck}"/>
                 </StackLayout>
 
                 <Button Text="Register" Command="{Binding RegisterCommand}"/>
@@ -89,7 +97,7 @@
                         <Setter Property="PlaceholderColor" Value="Black"/>
                     </Style>
                 </StackLayout.Resources>
-                
+
                 <Entry Placeholder="Email" Text="{Binding Text6}"/>
                 <Label Text="{Binding Check6}"/>
 
@@ -100,9 +108,9 @@
             </StackLayout>
 
             <StackLayout IsVisible="{Binding TenantLayout}" Spacing="20" Padding="10">
-                <Label Text="Tenants"/>
+                <Label Text="Tenants" FontSize="Medium" HorizontalOptions="Center"/>
 
-                <HorizontalStackLayout HorizontalOptions="CenterAndExpand" Spacing="20">
+                <HorizontalStackLayout Spacing="20">
                     <Entry Placeholder="Tenant Name" Text="{Binding TenantName}" PlaceholderColor="Black" BackgroundColor="WhiteSmoke"/>
                     <Picker BackgroundColor="WhiteSmoke" ItemsSource="{Binding Plans}" SelectedItem="{Binding SelectedPlan}"/>
                     <Button Text="Add" Command="{Binding AddTenantCommand}"/>
@@ -129,7 +137,7 @@
             </StackLayout>
 
             <StackLayout IsVisible="{Binding VmLayout}" Spacing="20" Padding="10">
-                <Label Text="Virtual Machines"/>
+                <Label Text="Virtual Machines" FontSize="Medium" HorizontalOptions="Center"/>
 
                 <Grid ColumnDefinitions="*, *, *" RowDefinitions="*, *, *, *" ColumnSpacing="5" RowSpacing="5">
                     <Grid.Resources>
@@ -155,7 +163,7 @@
                         <DataTemplate>
                             <SwipeView>
                                 <SwipeView.RightItems>
-                                    <SwipeItem Text="Run"/>
+                                    <SwipeItem Text="Run" BackgroundColor="Green"/>
                                     <SwipeItem Text="Delete" BackgroundColor="OrangeRed"/>
                                 </SwipeView.RightItems>
                                 <Frame>

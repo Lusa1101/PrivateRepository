@@ -25,12 +25,16 @@
         </StackLayout>
 
         <Frame IsVisible="{Binding HomeLayout}">
-            <StackLayout  Padding="5" Spacing="5" RadioButtonGroup.GroupName="layouts">
-                <RadioButton Content="Tenant Management" IsChecked="{Binding TenantLayout}"/>
-                <RadioButton Content="Resource Management"/>
-                <RadioButton Content="VM Monitoring" IsChecked="{Binding VmLayout}"/>
-                <RadioButton Content="Log out" IsChecked="{Binding LoginLayout}"/>
-            </StackLayout>
+            <HorizontalStackLayout  Padding="5" Spacing="25" RadioButtonGroup.GroupName="layouts">
+                <VerticalStackLayout>
+                    <RadioButton Content="Tenant Management" IsChecked="{Binding TenantLayout}"/>
+                    <RadioButton Content="Resource Management"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <RadioButton Content="VM Monitoring" IsChecked="{Binding VmLayout}"/>
+                    <RadioButton Content="Log out" IsChecked="{Binding LoginLayout}"/>
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
         </Frame>
 
         <StackLayout IsVisible="{Binding TenantLayout}" Spacing="20">
@@ -48,7 +52,26 @@
         </StackLayout>
         
         <StackLayout IsVisible="{Binding VmLayout}">
-
+            <CollectionView ItemsSource="{Binding Machines}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItem Text="Run"/>
+                                <SwipeItem Text="Delete" BackgroundColor="OrangeRed"/>
+                            </SwipeView.RightItems>
+                            <Frame>
+                                <Grid RowDefinitions="*, *" ColumnDefinitions="*, *" RowSpacing="5" ColumnSpacing="5">
+                                    <Label Text="{Binding Name, StringFormat='Name: {0}'}" Grid.Column="0" Grid.Row="0"/>
+                                    <Label Text="{Binding Tenant_id, StringFormat='Tenant id: {0}'}" Grid.Column="0" Grid.Row="1"/>
+                                    <Label Text="{Binding OS_type, StringFormat='OS: {0}'}" Grid.Column="1" Grid.Row="0"/>
+                                    <Label Text="{Binding Memory_size, StringFormat='Memory: {0}'}" Grid.Column="1" Grid.Row="1"/>
+                                </Grid>
+                            </Frame>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </StackLayout>
         
     </VerticalStackLayout>

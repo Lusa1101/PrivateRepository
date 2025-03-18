@@ -12,47 +12,49 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = CloudOS
-build_property.ProjectDir = C:\Users\omphu\Documents\PrivateRepository\Brony\CloudOS\
+build_property.ProjectDir = C:\Users\omphu\Documents\Brony\PrivateRepository\CloudOS\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/omphu/Documents/PrivateRepository/Brony/CloudOS/AdminView.xaml]
+[C:/Users/omphu/Documents/Brony/PrivateRepository/CloudOS/AdminView.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = CloudOS.AdminView.xaml
 build_metadata.AdditionalFiles.TargetPath = AdminView.xaml
 build_metadata.AdditionalFiles.RelativePath = AdminView.xaml
 
-[C:/Users/omphu/Documents/PrivateRepository/Brony/CloudOS/App.xaml]
+[C:/Users/omphu/Documents/Brony/PrivateRepository/CloudOS/App.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = CloudOS.App.xaml
 build_metadata.AdditionalFiles.TargetPath = App.xaml
 build_metadata.AdditionalFiles.RelativePath = App.xaml
 
-[C:/Users/omphu/Documents/PrivateRepository/Brony/CloudOS/AppShell.xaml]
+[C:/Users/omphu/Documents/Brony/PrivateRepository/CloudOS/AppShell.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = CloudOS.AppShell.xaml
 build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
 build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
 
-[C:/Users/omphu/Documents/PrivateRepository/Brony/CloudOS/MainPage.xaml]
+[C:/Users/omphu/Documents/Brony/PrivateRepository/CloudOS/MainPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = CloudOS.MainPage.xaml
 build_metadata.AdditionalFiles.TargetPath = MainPage.xaml
 build_metadata.AdditionalFiles.RelativePath = MainPage.xaml
 
-[C:/Users/omphu/Documents/PrivateRepository/Brony/CloudOS/Resources/Styles/Colors.xaml]
+[C:/Users/omphu/Documents/Brony/PrivateRepository/CloudOS/Resources/Styles/Colors.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = CloudOS.Resources.Styles.Colors.xaml
 build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Colors.xaml
 build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Colors.xaml
 
-[C:/Users/omphu/Documents/PrivateRepository/Brony/CloudOS/Resources/Styles/Styles.xaml]
+[C:/Users/omphu/Documents/Brony/PrivateRepository/CloudOS/Resources/Styles/Styles.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = CloudOS.Resources.Styles.Styles.xaml
 build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Styles.xaml
 build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Styles.xaml
 
-[C:/Users/omphu/Documents/PrivateRepository/Brony/CloudOS/TenantView.xaml]
+[C:/Users/omphu/Documents/Brony/PrivateRepository/CloudOS/TenantView.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = CloudOS.TenantView.xaml
 build_metadata.AdditionalFiles.TargetPath = TenantView.xaml

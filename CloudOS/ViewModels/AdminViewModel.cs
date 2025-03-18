@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -16,7 +17,7 @@ namespace CloudOS.ViewModels
     //Tenant management => Registration requests, logs,
     //Resource management
     //VM Monitioring
-    partial class AdminViewModel: ObservableObject
+    partial class AdminViewModel : ObservableObject
     {
         /***        StackLayout Controllers     **/
         [ObservableProperty]
@@ -53,6 +54,10 @@ namespace CloudOS.ViewModels
         DataTemplate? dataTemplat;   //For the selected data template
         [ObservableProperty]
         ObservableCollection<Object>? list;
+        
+        /***        For binding the DataTemplate declared in the App.xaml   ***/
+        //For tenant management
+        
 
         ObservableCollection<Client_view>? clients;        //Waiting for approval
         ObservableCollection<Tenant_view>? tenants;          //Manage Tenants
@@ -63,6 +68,10 @@ namespace CloudOS.ViewModels
 
         /***        Resource Management     **/
         /***        VM Monitoring   **/
+        [ObservableProperty]
+        ObservableCollection<string>? osTypes;
+        [ObservableProperty]
+        ObservableCollection<Virtual_Machine> machines = new();
 
         public AdminViewModel()
         {
@@ -198,6 +207,16 @@ namespace CloudOS.ViewModels
             {
                 new VM_view { Name="Vm1", Tenant_id = 1 },
                 new VM_view { Name="Vm2", Tenant_id = 2 }
+            };
+
+            //Set os_Types and machines
+            OsTypes = new ObservableCollection<string>() { "Ubuntu_64", "Windows_64", "Debian_64", "Redhat_64" };
+            Machines = new ObservableCollection<Virtual_Machine>()
+            {
+                new Virtual_Machine { Name = "VM!", OS_type = OsTypes[0], CPUs=2, Memory_size=2048, UUID="kjcjabu83gei983", Tenant_id=1},
+                new Virtual_Machine { Name = "VM2", OS_type = OsTypes[0], CPUs=2, Memory_size=2048, UUID="kjcjabu83gei93423", Tenant_id=1},
+                new Virtual_Machine { Name = "VM3", OS_type = OsTypes[0], CPUs=2, Memory_size=2048, UUID="kjcjabu83gei3", Tenant_id=2},
+                new Virtual_Machine { Name = "VM2", OS_type = OsTypes[0], CPUs=2, Memory_size=2048, UUID="kjcjabu83mdksgei983", Tenant_id=2}
             };
         }
 

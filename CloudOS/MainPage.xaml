@@ -2,8 +2,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:CloudOS"
+             xmlns:vm="clr-namespace:CloudOS.ViewModels"
              x:Class="CloudOS.MainPage">
 
+    <ContentPage.BindingContext>
+        <vm:MainViewModel/>
+    </ContentPage.BindingContext>
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="VerticalStackLayout" x:Key="displayWindow">
@@ -19,7 +23,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <StackLayout Padding="30,0" Spacing="25" >
+    <StackLayout BackgroundColor="Black" Padding="10" Spacing="25" >
         <Frame BackgroundColor="#676767" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
             <Grid ColumnDefinitions="1.75*, *, *" RowDefinitions=".1*, .1*, .1*, *" ColumnSpacing="20" RowSpacing="5">
 
@@ -30,21 +34,21 @@
                 <Label Text="ADMIN" Grid.Row="2" Grid.Column="0" Style="{StaticResource subheader}"/>
                 <ScrollView x:Name="scrollView" Grid.Row="3" Grid.Column="0" >
                     <VerticalStackLayout PropertyChanged="Layout_PropertyChanged" Style="{StaticResource displayWindow}">
-                        <local:AdminView/>
+                        <local:AdminView x:Name="admin"/>
                     </VerticalStackLayout>
                 </ScrollView>
 
                 <Label Text="Tenant 1" Grid.Row="2" Grid.Column="1" Style="{StaticResource subheader}"/>
                 <ScrollView Grid.Row="3" Grid.Column="1">
                     <VerticalStackLayout Style="{StaticResource displayWindow}">
-                        <local:TenantView/>
+                        <local:TenantView BindingContext="{Binding Tenant1}"/>
                     </VerticalStackLayout>
                 </ScrollView>
 
                 <Label Text="Tenant 2" Grid.Row="2" Grid.Column="2" Style="{StaticResource subheader}"/>
                 <ScrollView Grid.Row="3" Grid.Column="2">
                     <VerticalStackLayout Style="{StaticResource displayWindow}">
-                        <local:TenantView/>
+                        <local:TenantView BindingContext="{Binding Tenant2}"/>
                     </VerticalStackLayout>
                 </ScrollView>
             </Grid>

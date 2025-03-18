@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using CloudOS.Models;
+using CloudOS.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace CloudOS.ViewModels
@@ -21,19 +22,25 @@ namespace CloudOS.ViewModels
         //Function for input validation
         Functions functions = new();
 
+        //Class for data retrieval
+        DBManager dbManager = new();
+
         //Layouts' visibilities
         [ObservableProperty]
-        bool registerLayout;
+        bool registerLayout = false;
         [ObservableProperty]
-        bool loginLayout;
+        bool loginLayout = false;
         [ObservableProperty]
-        bool tenantLayout;
+        bool tenantLayout = false;
         [ObservableProperty]
-        bool vmLayout;
+        bool vmLayout = false;
+
+        [ObservableProperty]
+        string? selectedOption;
 
         //Tenant-Type based registration
         [ObservableProperty]
-        bool companyType;
+        string? companyType;
         [ObservableProperty]
         bool personalReg = false;
         [ObservableProperty]
@@ -68,7 +75,7 @@ namespace CloudOS.ViewModels
         string? check6;
 
         //The Registration Command
-        public ICommand? RegisterCommand { get; }
+        public ICommand RegisterCommand { get; }
 
         //Login
         [ObservableProperty]
@@ -85,12 +92,12 @@ namespace CloudOS.ViewModels
 
         //Variables for the Tenants
         [ObservableProperty]
-        ObservableCollection<string> plans = new ();
+        ObservableCollection<string> plans = new();
         [ObservableProperty]
         string? selectedPlan;
 
         [ObservableProperty]
-        ObservableCollection<Tenant> tenants = new ();
+        ObservableCollection<Tenant> tenants = new();
 
         [ObservableProperty]
         string? tenantName;
@@ -99,7 +106,7 @@ namespace CloudOS.ViewModels
 
         //Variables for Virtual Machines
         [ObservableProperty]
-        ObservableCollection<string> osTypes = new ();
+        ObservableCollection<string> osTypes = new();
         [ObservableProperty]
         string? selectedOSType;
 
@@ -113,7 +120,7 @@ namespace CloudOS.ViewModels
         public ICommand AddVMCommand { get; }
 
         [ObservableProperty]
-        ObservableCollection<Virtual_Machine> machines = new ();
+        ObservableCollection<Virtual_Machine> machines = new();
 
         public TenantViewModel()
         {
@@ -123,26 +130,8 @@ namespace CloudOS.ViewModels
             AddTenantCommand = new Command(AddTenant);
             AddVMCommand = new Command(AddVM);
 
-            //Initial Layout
-            VmLayout = true;
-
             //Set plans and tenants
-            Plans = new ObservableCollection<string>() { "Free-tier", "Gold", "Platinum" };
-            Tenants = new ObservableCollection<Tenant>()
-            {
-                new Tenant { Tenant_id = 1, Tenant_name = "Tenant 1", Subscription_plan = Plans[0] },
-                new Tenant { Tenant_id = 2, Subscription_plan = Plans[1], Tenant_name = "Tenant 2" }
-            };
-
-            //Set os_Types and machines
-            OsTypes = new ObservableCollection<string>() { "Ubuntu_64", "Windows_64", "Debian_64", "Redhat_64"};
-            Machines = new ObservableCollection<Virtual_Machine>()
-            {
-                new Virtual_Machine { Name = "VM!", OS_type = OsTypes[0], CPUs=2, Memory_size=2048, UUID="kjcjabu83gei983", Tenant_id=1},
-                new Virtual_Machine { Name = "VM2", OS_type = OsTypes[0], CPUs=2, Memory_size=2048, UUID="kjcjabu83gei93423", Tenant_id=1},
-                new Virtual_Machine { Name = "VM3", OS_type = OsTypes[0], CPUs=2, Memory_size=2048, UUID="kjcjabu83gei3", Tenant_id=2},
-                new Virtual_Machine { Name = "VM2", OS_type = OsTypes[0], CPUs=2, Memory_size=2048, UUID="kjcjabu83mdksgei983", Tenant_id=2}
-            };
+            _ = SetData();
         }
 
         void AddVM()
@@ -154,7 +143,7 @@ namespace CloudOS.ViewModels
             Virtual_Machine vm = new Virtual_Machine();
             vm.Name = Name;
             vm.OS_type = SelectedOSType;
-            vm.CPUs = int.Parse(String.IsNullOrEmpty(Cpus)?"-1":Cpus);
+            vm.CPUs = int.Parse(String.IsNullOrEmpty(Cpus) ? "-1" : Cpus);
             //We need to get the UUID and tenant_id
 
         }
@@ -184,8 +173,9 @@ namespace CloudOS.ViewModels
         //Registration method
         void Register()
         {
-            if (functions.CheckInput(Check1, Check2, Check3, Check4, Check5, Check6))
-               Debug.WriteLine("All clear to proceed.");
+            if (!string.IsNullOrEmpty(Text1) && !string.IsNullOrEmpty(Text2) && !string.IsNullOrEmpty(Text3) && !string.IsNullOrEmpty(Text4) && !string.IsNullOrEmpty(Text5) && !string.IsNullOrEmpty(Text6))
+                if (string.IsNullOrEmpty(Check1) && string.IsNullOrEmpty(Check2) && string.IsNullOrEmpty(Check3) && string.IsNullOrEmpty(Check4) && string.IsNullOrEmpty(Check5) && string.IsNullOrEmpty(Check6))
+                    Debug.WriteLine("All clear to proceed.");
 
             if (PersonalReg)
             {
@@ -214,6 +204,61 @@ namespace CloudOS.ViewModels
 
                 //Remember to validate the values
                 Debug.WriteLine("Company Registreation");
+            }
+        }
+
+        //To set the data for the collections
+        async Task SetData()
+        {
+            //For the Pickers
+            Plans = new ObservableCollection<string>() { "Free-tier", "Gold", "Platinum" };
+            OsTypes = new ObservableCollection<string>() { "Ubuntu_64", "Windows_64", "Debian_64", "Redhat_64" };
+
+            //Retrieve required data from the database            
+            Machines = new ObservableCollection<Virtual_Machine>(await dbManager.ReturnVMs());
+            Tenants = new ObservableCollection<Tenant>(await dbManager.ReturnTenants());
+        }
+
+        //Changing through different layouts
+        partial void OnSelectedOptionChanged(string? value)
+        {
+            ResetLayouts();
+            switch (value)
+            {
+                case "Register":
+                    RegisterLayout = true;
+                    break;
+                case "Virtual Machines":
+                    VmLayout = true;
+                    break;
+                case "Tenants":
+                    TenantLayout = true;
+                    break;
+                default:
+                    LoginLayout = true;
+                    break;
+
+            }
+        }
+        void ResetLayouts()
+        {
+            RegisterLayout = false;
+            LoginLayout = false;
+            TenantLayout = false;
+            VmLayout = false;
+        }
+
+        partial void OnCompanyTypeChanged(string? value)
+        {
+            if (value == "Personal")
+            {
+                CompanyReg = false;
+                PersonalReg = true;
+            }
+            else
+            {
+                PersonalReg = !PersonalReg;
+                CompanyReg = true;
             }
         }
 
@@ -246,7 +291,7 @@ namespace CloudOS.ViewModels
 
         partial void OnText3Changed(string? value)
         {
-            if (!String.IsNullOrEmpty(value) && !(functions.NumberValidator(value, true)))
+            if (!String.IsNullOrEmpty(value) && !(functions.NumberValidator(value, PersonalReg)))
                 Check3 = "Not a vaild number input.";
             else
                 Check3 = string.Empty;
@@ -278,14 +323,15 @@ namespace CloudOS.ViewModels
 
         partial void OnPasswordChanged(string? value)
         {
-            PasswordCheck = functions.PasswordChecker(value);
+            if (!string.IsNullOrEmpty(value))
+                PasswordCheck = functions.PasswordChecker(value);
         }
 
         partial void OnCpusChanged(string? value)
         {
             if (!String.IsNullOrEmpty(value) && !functions.NumberValidator(value))
                 Check2 = "Enter valid number of CPUS.";
-            else 
+            else
                 Check2 = string.Empty;
         }
 
