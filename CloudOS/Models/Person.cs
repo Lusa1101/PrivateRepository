@@ -8,7 +8,7 @@ namespace CloudOS.Models
 {
     internal class Person
     {
-        public long Id { get; set; }
+        public decimal Id { get; set; }
         public string? Names { get; set; }
         public string? Surname { get; set; }
         public string? Address { get; set; }

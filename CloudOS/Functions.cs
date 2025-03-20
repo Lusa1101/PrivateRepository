@@ -62,7 +62,7 @@ namespace CloudOS
         public bool SpecialCharChecker(string value)
         {
             foreach(char c in value)
-                if (!Char.IsAsciiLetterOrDigit(c) && !Char.IsWhiteSpace(c))
+                if (!Char.IsAsciiLetterOrDigit(c) && c != ',' && c != '.' && !Char.IsWhiteSpace(c))
                     return false;
 
             return true;
@@ -101,11 +101,26 @@ namespace CloudOS
                 return "Must have at least one special char like @#$$%.";
 
             //Length check
-            if (value.Length < 9)
+            if (value.Length < 8)
                 return "Length of at least 8 characters.";
 
 
             return string.Empty;
+        }
+
+        public string? ReturnVMUUID(string value)
+        {
+            //Using regular expressions to get only the UUID from the @result.
+            string pattern = @"UUID:\s([0-9a-f-]+)";        //I removed ? at the end of the pattern
+            Match match = Regex.Match(value, pattern, RegexOptions.IgnoreCase);
+
+            if (match.Success)
+                return match.Groups[1].Value;
+            else
+            {
+                Debug.WriteLine("Failed to get match for the UUID. \n" + value);
+                return null;
+            }
         }
     }
 }

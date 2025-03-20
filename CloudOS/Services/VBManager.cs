@@ -32,9 +32,10 @@ namespace CloudOS.Services
 
         public string CreateVM(string vmName, string vdiName = "CorePlus", string controllerName = "SATA Controller", string osType = "ubuntu_64", int memoryMB = 512, int cpus = 2, int hdSize = 5120)
         {
-            string path = "C:\\Users\\omphu\\Documents\\Brony\\VM\\";
+            string path = "C:\\Users\\omphu\\Documents\\Brony\\CorePlus\\";
             string vdiPath = Path.Combine(path, $"{vdiName}.vdi");
             string isoPath = Path.Combine(path, "CorePlus-current.iso");
+            string basefolder = $"C:\\Users\\omphu\\Documents\\Brony\\VM\\";
             string output;
 
             // Helper function to detect specific error patterns
@@ -51,8 +52,11 @@ namespace CloudOS.Services
 
             // 2. Create the Virtual Machine
                 //System.IO.Directory.CreateDirectory(path); if it does not exist
-                //Add --baseling "{path}/{tenant_id}"
-            string createCommand = $"createvm --name \"{vmName}\" --ostype {osType} --register";    
+                //Add --basefolder "{path}/{tenant_id}"
+                //Create the directory if it does not exist before the vm is created.
+            if(!Directory.Exists(basefolder))
+                Directory.CreateDirectory(basefolder);
+            string createCommand = $"createvm --name \"{vmName}\" --basefolder {basefolder} --ostype {osType} --register";    
             output = ExecuteVMCommand(createCommand);
             if (HasErrors(output)) return "Error: Failed to create VM.";
 

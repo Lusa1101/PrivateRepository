@@ -2,6 +2,7 @@
 using System.Collections;
 using Microsoft.Extensions.Configuration;
 using CloudOS.Models;
+using System.Diagnostics;
 
 namespace CloudOS
 {
@@ -12,11 +13,7 @@ namespace CloudOS
         public DBManager()
         {
             _connectionString = Environment.GetEnvironmentVariable("POSTGRES_CONNECTION_STRING", EnvironmentVariableTarget.User);
-            IDictionary variables = Environment.GetEnvironmentVariables();
-            foreach (DictionaryEntry entry in variables )
-            {
-                Console.WriteLine($"{entry.Key}: {entry.Value}");
-            }
+            
         }
 
         public NpgsqlConnection CreateConnection()
@@ -24,15 +21,44 @@ namespace CloudOS
             return new NpgsqlConnection(_connectionString);
         }
 
-        async Task<int> ExecuteScalarQueryAsync(string query)
+        async Task<long> ExecuteScalarQueryAsync(string query)
         {
             using (var connection = CreateConnection())
             {
                 await connection.OpenAsync();
                 using (var command = new NpgsqlCommand(query, connection))
                 {
-                    var result = await command.ExecuteScalarAsync();
-                    return (int)(result != null ? result : -1);
+                    try
+                    {
+                        var result = await command.ExecuteScalarAsync();
+                        return (long)(result != null ? result : -1);
+                    }
+                    catch(Exception ex)
+                    {
+                        Debug.WriteLine(ex.Message);
+                        return -1;
+                    }
+                }
+            }
+        }
+
+        async Task<decimal> ExecuteScalarQueryAsyncDec(string query)
+        {
+            using (var connection = CreateConnection())
+            {
+                await connection.OpenAsync();
+                using (var command = new NpgsqlCommand(query, connection))
+                {
+                    try
+                    {
+                        decimal result = Convert.ToDecimal(await command.ExecuteScalarAsync());
+                        return result > 0 ? result : -1;
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(ex.Message);
+                        return -1;
+                    }
                 }
             }
         }
@@ -46,13 +72,23 @@ namespace CloudOS
             {
                 await connection.OpenAsync();
                 using (var command = new NpgsqlCommand(query, connection))
-                    return await command.ExecuteNonQueryAsync();
+                {
+                    try
+                    {
+                        return await command.ExecuteNonQueryAsync();
+                    }
+                    catch(Exception ex)
+                    {
+                        Debug.WriteLine(ex.Message);
+                        return -1;
+                    }
+                }
             }
         }
 
-        public async Task<bool> AddTenant(string subscription_plan)
+        public async Task<bool> AddTenant(Tenant tenant)
         {
-            string query = $"insert into tenant(subscription_plan) values ('{subscription_plan}');";
+            string query = $"insert into tenant(client_id, tenant_name, subscription_plan) values ({tenant.Client_id}, '{tenant.Tenant_name}', '{tenant.Subscription_plan}');";
             int result = await ExecuteNonQueryAsync(query);
 
             return result > 0;
@@ -61,44 +97,47 @@ namespace CloudOS
         {
             string query = "select max(tenant_id) from tenant;";
 
-            return await ExecuteScalarQueryAsync(query);
+            return (int)(await ExecuteScalarQueryAsync(query));
         }
-        public async Task<bool> AddCompany(Company company, string subscription_plan)
+        async Task<int> ReturnNewCompanyID()
         {
-            int result = 0;
-            //Add the tenant
-            if (await AddTenant(subscription_plan))
-            {
-                //Add the company
-                string companyQuery = "insert into company(name, registration_no, tax_no, address, contact_no, email)" +
-                            $" values ('{company.Name}', '{company.Registration_no}', '{company.Tax_no}', '{company.Address}', '{company.Contact_no}', '{company.Email}')";
-                result = await ExecuteNonQueryAsync(companyQuery);
+            string query = "select max(company_id) from company;";
 
-                //Add the Tenant_company
-                string companyTenantQuery = $"insert into tenant_company (tenant_id, company_id) values ({ReturnNewTenantID()}, {company.Company_id}); ";
-                if (result > 0)
-                    result = await ExecuteNonQueryAsync(companyTenantQuery);
-            }
-
-            return result > 0;
+            return (int)(await ExecuteScalarQueryAsync(query));
         }
 
-        public async Task<bool> AddPerson(Person person, string subscription_plan)
+        public async Task<bool> AddCompany(Company company, string password)
         {
             int result = 0;
-            //Add the tenant
-            if (await AddTenant(subscription_plan))
-            {
-                //Add the company
-                string companyQuery = "insert into person(id, names, surname, address, cell, email, type)" +
-                            $" values ({person.Id}, '{person.Names}', '{person.Surname}', '{person.Address}', '{person.Cell}', '{person.Email}', '{person.Type}');";
-                result = await ExecuteNonQueryAsync(companyQuery);
+            //Add the company
+            string companyQuery = "insert into company(name, registration_no, tax_no, address, contact_no, email) values ('{company.Name}', '{company.Registration_no}', '{company.Tax_no}', '{company.Address}', '{company.Contact_no}', '{company.Email}')";
+            result = await ExecuteNonQueryAsync(companyQuery);
 
-                //Add the Tenant_company
-                string companyTenantQuery = $"insert into tenant_user (tenant_id, id) values ({ReturnNewTenantID()}, {person.Id}); ";
-                if (result > 0)
-                    result = await ExecuteNonQueryAsync(companyTenantQuery);
-            }
+            //Add the client
+            int company_id = await ReturnNewCompanyID();
+            string clientQuery = $"insert into client (client_id, client_type, password) values ({company_id}, 'company', '{password}'); ";
+            if (result > 0)
+                result = await ExecuteNonQueryAsync(clientQuery);
+            else
+                await DeleteCompany(company);
+
+                return result > 0;
+        }
+
+        public async Task<bool> AddPerson(Person person, string password)
+        {
+            int result = 0;
+            //Add the person
+            string personQuery = "insert into person(id, names, surname, address, cell, email, type)" +
+                        $" values ({person.Id}, '{person.Names}', '{person.Surname}', '{person.Address}', '{person.Cell}', '{person.Email}', '{person.Type}');";
+            result = await ExecuteNonQueryAsync(personQuery);
+
+            //Add the client
+            string clientQuery = $"insert into client (client_id, client_type, password) values ({person.Id}, 'personal', '{password}'); ";
+            if (result > 0)
+                result = await ExecuteNonQueryAsync(clientQuery);
+            else
+                await DeletePerson(person);
 
             return result > 0;
         }
@@ -114,16 +153,57 @@ namespace CloudOS
             return result > 0;
         }
 
-        public async Task<bool> AddUser(Tenant_user user, string subscription_plan)
+        async Task<bool> DeleteCompany(Company company)
         {
             int result = 0;
-            if (await AddTenant(subscription_plan))
-            {
-                string query = $"insert into tenant_user(subscription) values ('{subscription_plan}');";
-                result = await ExecuteNonQueryAsync(query);
-            }
+            string query = $"delete from company where company_id = {company.Company_id}";
+
+            result = await ExecuteNonQueryAsync(query);
 
             return result > 0;
+        }
+
+        async Task<bool> DeletePerson(Person person)
+        {
+            int result = 0;
+            string query = $"delete from person where id = {person.Id}";
+
+            result = await ExecuteNonQueryAsync(query);
+
+            return result > 0;
+        }
+
+        async Task<bool> DeleteVM(Virtual_Machine vm)
+        {
+            int result = 0;
+            string query = $"delete from virtual_machine where UUID = {vm.UUID}";
+
+            result = await ExecuteNonQueryAsync(query);
+
+            return result > 0;
+        }
+
+        public async Task<bool> ApproveClient(decimal client_id)
+        {
+            string query = $"update client set approved = '1' where client_id = {client_id};";
+            int result = await ExecuteNonQueryAsync(query);
+
+            return result > 0;
+        }
+
+        public async Task DeclineClient(int client_id)
+        {
+            await Task.Delay(10);
+        }
+
+        public async Task<decimal> Authenticate(string email, string password)
+        {
+            decimal result = -1;
+            Client client = new();
+            string query = $"select client_id from client_auth_view where approved = '1' AND email = '{email}' AND password = '{password}';";
+            result = await ExecuteScalarQueryAsyncDec(query);
+
+            return result;
         }
 
         public async Task<List<Tenant>> ReturnTenants()
@@ -133,6 +213,30 @@ namespace CloudOS
             {
                 await connection.OpenAsync();
                 string query = "select tenant_id, subscription_plan from tenant;";
+                var command = new NpgsqlCommand(query, connection);
+                using (NpgsqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Tenant temp = new();
+                        temp.Tenant_id = reader.GetInt32(0);
+                        temp.Subscription_plan = reader.GetString(1);
+
+                        //Add to the list
+                        tenants.Add(temp);
+                    }
+                }
+            }
+
+            return tenants;
+        }
+        public async Task<List<Tenant>> ReturnTenantsById(decimal client_id)
+        {
+            List<Tenant> tenants = new List<Tenant>();
+            using (var connection = CreateConnection())
+            {
+                await connection.OpenAsync();
+                string query = $"select tenant_id, subscription_plan from tenant where client_id = {client_id};";
                 var command = new NpgsqlCommand(query, connection);
                 using (NpgsqlDataReader reader = command.ExecuteReader())
                 {
@@ -176,6 +280,90 @@ namespace CloudOS
                 }
             }
 
+            return vms;
+        }
+
+        public async Task<List<Client_view>> ReturnClientViews()
+        {
+            List<Client_view> clients = new List<Client_view>();
+            using(var connection = CreateConnection())
+            {
+                await connection.OpenAsync();
+                string query = "select name, address, type, client_id from client_view where approved = '0';";
+                var command = new NpgsqlCommand(query, connection); 
+
+                using (NpgsqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Client_view client = new();
+                        client.Name = reader.GetString(0);
+                        client.Address = reader.GetString(1);
+                        client.Type = reader.GetString(2);
+                        client.Client_id = reader.GetInt64(3);
+
+                        //Add to clients
+                        clients.Add(client);
+                    }
+                }
+            }
+            return clients;
+        }
+
+        public async Task<List<Tenant_view>> ReturnTenantViews()
+        {
+            List<Tenant_view> tenants = new();
+            using (var connection = CreateConnection())
+            {
+                await connection.OpenAsync();
+                string query = "select tenant_id, name, type, address, subscription_plan from tenant_view";
+                var command = new NpgsqlCommand(query, connection);
+                using (NpgsqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var tenant = new Tenant_view();
+                        tenant.Name = reader.GetString(1);
+                        tenant.Tenant_id = reader.GetInt32(0);
+                        tenant.Tenant_type = reader.GetString(2);
+                        tenant.Address = reader.GetString(3);
+                        tenant.Subscription_plan = reader.GetString(4);
+
+                        //Add to tenants
+                        tenants.Add(tenant);
+                    }
+                }
+            }
+
+            return tenants;
+        }
+
+        public async Task<List<VM_view>> ReturnVMViews()
+        {
+            List<VM_view> vms = new();
+            using (var connection = CreateConnection())
+            {
+                await connection.OpenAsync();
+                string query = "select tenant_id, name, subscription_plan, vm_names, os_type, memory_size, cpus from vm_view;";
+                var command = new NpgsqlCommand(query, connection);
+                using (NpgsqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var vm = new VM_view();
+                        vm.Tenant_id = reader.GetInt32(0);
+                        vm.Name = reader.GetString(1);
+                        vm.Subscription_plan = reader.GetString(2);
+                        vm.VM_names = reader.GetString(3);
+                        vm.OS_type = reader.GetString(4);
+                        vm.Memory_size = reader.GetInt32(5);
+                        vm.Cpus = reader.GetInt32(6);
+
+                        //Add to vms
+                        vms.Add(vm);
+                    }
+                }
+            }
             return vms;
         }
     }

@@ -38,14 +38,14 @@
                     </VerticalStackLayout>
                 </ScrollView>
 
-                <Label Text="Tenant 1" Grid.Row="2" Grid.Column="1" Style="{StaticResource subheader}"/>
+                <Label Text="Client 1" Grid.Row="2" Grid.Column="1" Style="{StaticResource subheader}"/>
                 <ScrollView Grid.Row="3" Grid.Column="1">
                     <VerticalStackLayout Style="{StaticResource displayWindow}">
                         <local:TenantView BindingContext="{Binding Tenant1}"/>
                     </VerticalStackLayout>
                 </ScrollView>
 
-                <Label Text="Tenant 2" Grid.Row="2" Grid.Column="2" Style="{StaticResource subheader}"/>
+                <Label Text="Client 2" Grid.Row="2" Grid.Column="2" Style="{StaticResource subheader}"/>
                 <ScrollView Grid.Row="3" Grid.Column="2">
                     <VerticalStackLayout Style="{StaticResource displayWindow}">
                         <local:TenantView BindingContext="{Binding Tenant2}"/>

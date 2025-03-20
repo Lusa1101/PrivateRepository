@@ -18,7 +18,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CloudOS")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+a121b85aec20444f27668571b3501ed6be7f0713")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+ee903507d5d92bd63d9df32577ba4917c261bc46")]
 [assembly: System.Reflection.AssemblyProductAttribute("CloudOS")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CloudOS")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

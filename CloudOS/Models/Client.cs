@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace CloudOS.Models
 {
-    public class Client_view
+    public class Client
     {
         public decimal Client_id { get; set; }
-        public string? Name { get; set; }
-        public string? Address { get; set; }
-        public string? Type { get; set; }
+        public string? Client_type { get; set; }
+        public string? Password { get; set; }
         public bool Approved { get; set; }
     }
 }

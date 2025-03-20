@@ -98,7 +98,7 @@
                     </Style>
                 </StackLayout.Resources>
 
-                <Entry Placeholder="Email" Text="{Binding Text6}"/>
+                <Entry Placeholder="Email" Text="{Binding Email}"/>
                 <Label Text="{Binding Check6}"/>
 
                 <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True"/>

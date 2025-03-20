@@ -8,7 +8,7 @@ namespace CloudOS.Models
 {
     internal class Company
     {
-        public int Company_id { get; set; }
+        public decimal Company_id { get; set; }
         public string? Name { get; set; }
         public string? Registration_no { get; set; }
         public string? Tax_no { get; set; }

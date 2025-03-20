@@ -25,6 +25,9 @@ namespace CloudOS.ViewModels
         //Class for data retrieval
         DBManager dbManager = new();
 
+        //For VBoxManage
+        VBManager vbManager = new VBManager();
+
         //Layouts' visibilities
         [ObservableProperty]
         bool registerLayout = false;
@@ -77,7 +80,7 @@ namespace CloudOS.ViewModels
         //The Registration Command
         public ICommand RegisterCommand { get; }
 
-        //Login
+        /***        Login   ***/
         [ObservableProperty]
         string? email;
         [ObservableProperty]
@@ -89,6 +92,11 @@ namespace CloudOS.ViewModels
 
         //ICommand for Login
         public ICommand LoginCommand { get; }
+
+        //The logged-in user
+        private decimal Client_id;
+
+        /***        End of Login    ***/
 
         //Variables for the Tenants
         [ObservableProperty]
@@ -134,7 +142,7 @@ namespace CloudOS.ViewModels
             _ = SetData();
         }
 
-        void AddVM()
+        async void AddVM()
         {
             Debug.WriteLine("Reached");
             if (String.IsNullOrEmpty(Name) || String.IsNullOrEmpty(SelectedOSType))
@@ -144,67 +152,128 @@ namespace CloudOS.ViewModels
             vm.Name = Name;
             vm.OS_type = SelectedOSType;
             vm.CPUs = int.Parse(String.IsNullOrEmpty(Cpus) ? "-1" : Cpus);
-            //We need to get the UUID and tenant_id
 
+            //We need to get the UUID and tenant_id
+            string vmReg = vbManager.CreateVM(vm.Name);
+            if (!vmReg.Contains("Error"))
+                vm.UUID = functions.ReturnVMUUID(vmReg);
+            else
+            {
+                Debug.WriteLine("Failed to get UUID.");
+                return;
+            }
+
+            //We can now add it to the DB
+            if (await dbManager.AddVM(vm))
+                Debug.WriteLine("Successfully created the vm.");
+            else
+                Debug.WriteLine("Unsuccessfully created the vm.");
         }
 
-        void AddTenant()
+        async void AddTenant()
         {
-            if (string.IsNullOrEmpty(TenantName) || string.IsNullOrEmpty(SelectedPlan))
-                return;
+            if (!string.IsNullOrEmpty(TenantName) && !string.IsNullOrEmpty(SelectedPlan))
+            {
+                Tenant tenant = new Tenant();
+                tenant.Tenant_name = TenantName;
+                tenant.Subscription_plan = SelectedPlan;
 
-            Tenant tenant = new Tenant();
-            tenant.Tenant_name = TenantName;
-            tenant.Subscription_plan = SelectedPlan;
+                //Add the tenant to the DB
+                if (await dbManager.AddTenant(tenant))
+                    Debug.WriteLine("Added tenant successfully");
+                else
+                    Debug.WriteLine("Added tenant unsuccessfully");
 
-            //Add to the tenants
-            Tenants.Add(tenant);
+                //Add to the tenants
+                Tenants.Add(tenant);
+            }
+            else
+                Debug.WriteLine("Please fill in the TenantName and Select an option");
+
         }
 
         //Login method
-        void Login()
+        async void Login()
         {
-            if (!String.IsNullOrEmpty(Check6) || !String.IsNullOrEmpty(PasswordCheck))
-                return;
+            if (!string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Password))
+            {
+                //Authenticate and get the current cliwnt details
+                Client_id = await dbManager.Authenticate(Email, Password);
 
-            Debug.WriteLine("Safe to login");
+                if (Client_id > 0)
+                {
+                    //Initiate the layout
+                    //Set data
+                    await SetData();
+
+                    //Reset all the layouts
+                    ResetLayouts();
+
+                    //Initial layout to be tenants
+                    TenantLayout = true;
+                    SelectedOption = "Tenants";
+
+                    Debug.WriteLine("Login successful.");
+                }
+                else
+                    Debug.WriteLine("Failed to login.");
+            }
+            else
+                Debug.WriteLine("Failed to login. Fill in the username and/or password.");
         }
 
         //Registration method
-        void Register()
+        async void Register()
         {
-            if (!string.IsNullOrEmpty(Text1) && !string.IsNullOrEmpty(Text2) && !string.IsNullOrEmpty(Text3) && !string.IsNullOrEmpty(Text4) && !string.IsNullOrEmpty(Text5) && !string.IsNullOrEmpty(Text6))
-                if (string.IsNullOrEmpty(Check1) && string.IsNullOrEmpty(Check2) && string.IsNullOrEmpty(Check3) && string.IsNullOrEmpty(Check4) && string.IsNullOrEmpty(Check5) && string.IsNullOrEmpty(Check6))
-                    Debug.WriteLine("All clear to proceed.");
+            if (!string.IsNullOrEmpty(Text1) && !string.IsNullOrEmpty(Text2) && !string.IsNullOrEmpty(Text3) && !string.IsNullOrEmpty(Text4) && !string.IsNullOrEmpty(Text5) && !string.IsNullOrEmpty(Text6) && !string.IsNullOrEmpty(Password))
+                if (string.IsNullOrEmpty(Check1) && string.IsNullOrEmpty(Check2) && string.IsNullOrEmpty(Check3) && string.IsNullOrEmpty(Check4) && string.IsNullOrEmpty(Check5) && string.IsNullOrEmpty(Check6) && string.IsNullOrEmpty(PasswordCheck))
+                {
+                    if (PersonalReg)
+                    {
+                        //To register the Person
+                        Person person = new Person();
+                        person.Names = Text1;
+                        person.Surname = Text2;
+                        person.Id = long.Parse(String.IsNullOrEmpty(Text3) ? "-1" : Text3);
+                        person.Address = Text4;
+                        person.Cell = Text5;
+                        person.Email = Text6;
 
-            if (PersonalReg)
-            {
-                //To register the Person
-                Person person = new Person();
-                person.Names = Text1;
-                person.Surname = Text2;
-                person.Id = long.Parse(String.IsNullOrEmpty(Text3) ? "-1" : Text3);
-                person.Address = Text4;
-                person.Cell = Text5;
-                person.Email = Text6;
+                        //Remember to validate the values
+                        Debug.WriteLine("Personal Registration");
 
-                //Remember to validate the values
-                Debug.WriteLine("Personal Registration");
-            }
-            else
-            {
-                //To register the company
-                Company company = new Company();
-                company.Name = Text1;
-                company.Registration_no = Text2;
-                company.Tax_no = Text3;
-                company.Address = Text4;
-                company.Contact_no = Text5;
-                company.Email = Text6;
+                        //Add to the database
+                        if (await dbManager.AddPerson(person, Password))
+                            Debug.WriteLine("Successfully registered. Please wait for approval.");
+                        else
+                            Debug.WriteLine("Registration was unsuccessful.");
+                    }
+                    else
+                    {
+                        //To register the company
+                        Company company = new Company();
+                        company.Name = Text1;
+                        company.Registration_no = Text2;
+                        company.Tax_no = Text3;
+                        company.Address = Text4;
+                        company.Contact_no = Text5;
+                        company.Email = Text6;
 
-                //Remember to validate the values
-                Debug.WriteLine("Company Registreation");
-            }
+                        //Remember to validate the values
+                        Debug.WriteLine("Company Registreation");
+
+                        //Add to the DB
+                        if (await dbManager.AddCompany(company, Password))
+                            Debug.WriteLine("Successfully registered. Please wait for approval.");
+                        else
+                            Debug.WriteLine("Registration was unsuccessful.");
+
+                    }
+                }
+                else
+                    Debug.WriteLine("Please complete all the entries.");
+
+            
         }
 
         //To set the data for the collections
@@ -216,29 +285,36 @@ namespace CloudOS.ViewModels
 
             //Retrieve required data from the database            
             Machines = new ObservableCollection<Virtual_Machine>(await dbManager.ReturnVMs());
-            Tenants = new ObservableCollection<Tenant>(await dbManager.ReturnTenants());
+            if (Client_id > 0)
+                Tenants = new ObservableCollection<Tenant>(await dbManager.ReturnTenantsById(Client_id));
         }
 
         //Changing through different layouts
         partial void OnSelectedOptionChanged(string? value)
         {
-            ResetLayouts();
-            switch (value)
+            if (Client_id > 0 || value == "Register" || value == "Login")
             {
-                case "Register":
-                    RegisterLayout = true;
-                    break;
-                case "Virtual Machines":
-                    VmLayout = true;
-                    break;
-                case "Tenants":
-                    TenantLayout = true;
-                    break;
-                default:
-                    LoginLayout = true;
-                    break;
+                ResetLayouts();
+                switch (value)
+                {
+                    case "Register":
+                        RegisterLayout = true;
+                        break;
+                    case "Virtual Machines":
+                        VmLayout = true;
+                        break;
+                    case "Tenants":
+                        TenantLayout = true;
+                        break;
+                    default:
+                        LoginLayout = true;
+                        break;
 
+                }
             }
+            else
+                Debug.WriteLine("Please login.");
+            
         }
         void ResetLayouts()
         {
@@ -315,7 +391,7 @@ namespace CloudOS.ViewModels
 
         partial void OnText6Changed(string? value)
         {
-            if (!String.IsNullOrEmpty(value) && !(functions.EmailValidator(value)))
+            if (!LoginLayout && !String.IsNullOrEmpty(value) && !(functions.EmailValidator(value)))
                 Check6 = "Not a vaild email input.";
             else
                 Check6 = string.Empty;
@@ -323,7 +399,7 @@ namespace CloudOS.ViewModels
 
         partial void OnPasswordChanged(string? value)
         {
-            if (!string.IsNullOrEmpty(value))
+            if (!LoginLayout && !string.IsNullOrEmpty(value))
                 PasswordCheck = functions.PasswordChecker(value);
         }
 

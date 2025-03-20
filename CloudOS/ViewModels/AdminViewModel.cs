@@ -19,6 +19,9 @@ namespace CloudOS.ViewModels
     //VM Monitioring
     partial class AdminViewModel : ObservableObject
     {
+        //DB Access
+        DBManager dbMananger = new();
+
         /***        StackLayout Controllers     **/
         [ObservableProperty]
         bool loginLayout;
@@ -43,9 +46,10 @@ namespace CloudOS.ViewModels
         public ICommand LoginCommand { get; set; }
 
         /***            Tenant Management       **/
+        
         //For registration approval
         [ObservableProperty]
-        List<string> options = new() { "Approve", "Tenants", "Virtual Machines" };
+        List<string> options = new() { "Approve", "Tenants" };
         [ObservableProperty]
         string? selectedOption;
 
@@ -54,14 +58,13 @@ namespace CloudOS.ViewModels
         DataTemplate? dataTemplat;   //For the selected data template
         [ObservableProperty]
         ObservableCollection<Object>? list;
-        
-        /***        For binding the DataTemplate declared in the App.xaml   ***/
-        //For tenant management
-        
 
         ObservableCollection<Client_view>? clients;        //Waiting for approval
         ObservableCollection<Tenant_view>? tenants;          //Manage Tenants
-        ObservableCollection<VM_view>? vms;                  //Monitor Virtual Machines 
+
+        //Commands
+        public ICommand? DeclineCommand { get; set; }
+        public ICommand? ApproveCommand { get; set; }
 
         /***        End of Tenant Management    **/
 
@@ -70,40 +73,76 @@ namespace CloudOS.ViewModels
         /***        VM Monitoring   **/
         [ObservableProperty]
         ObservableCollection<string>? osTypes;
-        [ObservableProperty]
-        ObservableCollection<Virtual_Machine> machines = new();
+        ObservableCollection<VM_view>? vms;
 
         public AdminViewModel()
         {
             //Setting the ICommands
             CoordinatorCommand = new Command<Button>(SetLayouts);
             LoginCommand = new Command(Login);
+            ApproveCommand = new Command<Client_view>(Approve);
+            DeclineCommand = new Command<Client_view>(Decline);
+
+            //Set the current layout
+            LoginLayout = true;
 
             //Dummy data
             SetData();
+        }
 
-            //Initial layout
-            CurrentLayout = "Login";
-            LoginLayout = true;
-            HomeLayout = false;
-            TenantLayout = false;
-            VmLayout = false;
+        async void Approve(Client_view client)
+        {
+            if (await dbMananger.ApproveClient(client.Client_id))
+            {
+                //We need to update the lists
+                SetData();
+                if (clients != null)
+                    List = new ObservableCollection<object>(clients);
+
+                Debug.WriteLine(client.Name + " was approved.");
+            }
+            else
+                Debug.WriteLine(client.Name + " was not approved.");
+        }
+
+        void Decline(Client_view client)
+        {
+            Debug.WriteLine(client.Name + " was declined.");
         }
 
         void Login()
         {
-            //Set login layout to false if authorized
-            LoginLayout = false;
+            if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
+            {
+                //Authentication
 
-            //Current Layout is homeLayout
-            HomeLayout = true;
-            CurrentLayout = "Home";
+                //Set login layout to false if authorized
+                LoginLayout = false;
+
+                //Current Layout is homeLayout
+                HomeLayout = true;
+                CurrentLayout = "Home";
+
+                //Clear the entries
+                Username = null;
+                Password = null;
+            }
+            else
+                Debug.WriteLine("Please fill in your username and/or the password.");
+
+                
         }
 
         partial void OnLoginLayoutChanged(bool value)
         {
             //Disable the options
-            HomeLayout = false;
+            HomeLayout = !value;
+        }
+
+        partial void OnVmLayoutChanged(bool value)
+        {
+            if (vms != null)
+                List = new ObservableCollection<Object>(vms);
         }
 
         partial void OnSelectedOptionChanged(string? value)
@@ -125,15 +164,6 @@ namespace CloudOS.ViewModels
                     //Source for the collection
                     if (tenants != null)
                         List = new ObservableCollection<Object>(tenants);
-                    break;
-
-                case "Virtual Machines":
-                    //DataTemplate
-                    if (App.Current != null)
-                        DataTemplat = (DataTemplate)App.Current.Resources["vmDT"];
-                    //Source for the collection
-                    if (vms != null)
-                        List = new ObservableCollection<Object>(vms);
                     break;
 
             }
@@ -191,33 +221,15 @@ namespace CloudOS.ViewModels
             CurrentLayout = text;
         }
 
-        void SetData()
+        async void SetData()
         {
-            clients = new ObservableCollection<Client_view>()
-            {
-                new Client_view { Name="Omphulusa", Address="Diepkloof", Type="Company"},
-                new Client_view { Name="Ndivhuwo Mashau", Address="Diepsloot", Type="Personal"}
-            };
-            tenants = new ObservableCollection<Tenant_view>()
-            {
-                new Tenant_view { Name="Omphulusa", Address="Diepkloof", Subscription_plan="Free", Tenant_type="Company", Tenant_id=1},
-                new Tenant_view { Name="Ndivhuwo Mashau", Address="Diepsloot", Subscription_plan="Silver", Tenant_type="Personal", Tenant_id=3}
-            };
-            vms = new ObservableCollection<VM_view>()
-            {
-                new VM_view { Name="Vm1", Tenant_id = 1 },
-                new VM_view { Name="Vm2", Tenant_id = 2 }
-            };
+            clients = new ObservableCollection<Client_view>(await dbMananger.ReturnClientViews());
+            tenants = new ObservableCollection<Tenant_view>(await dbMananger.ReturnTenantViews());
+            vms = new ObservableCollection<VM_view>(await dbMananger.ReturnVMViews());
 
             //Set os_Types and machines
             OsTypes = new ObservableCollection<string>() { "Ubuntu_64", "Windows_64", "Debian_64", "Redhat_64" };
-            Machines = new ObservableCollection<Virtual_Machine>()
-            {
-                new Virtual_Machine { Name = "VM!", OS_type = OsTypes[0], CPUs=2, Memory_size=2048, UUID="kjcjabu83gei983", Tenant_id=1},
-                new Virtual_Machine { Name = "VM2", OS_type = OsTypes[0], CPUs=2, Memory_size=2048, UUID="kjcjabu83gei93423", Tenant_id=1},
-                new Virtual_Machine { Name = "VM3", OS_type = OsTypes[0], CPUs=2, Memory_size=2048, UUID="kjcjabu83gei3", Tenant_id=2},
-                new Virtual_Machine { Name = "VM2", OS_type = OsTypes[0], CPUs=2, Memory_size=2048, UUID="kjcjabu83mdksgei983", Tenant_id=2}
-            };
+            
         }
 
     }

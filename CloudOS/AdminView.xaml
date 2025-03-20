@@ -20,7 +20,7 @@
         
         <StackLayout Padding="10" Spacing="10" IsVisible="{Binding LoginLayout}">
             <Entry Placeholder="Username" Text="{Binding Username}" Style="{StaticResource loginEntry}"/>
-            <Entry Placeholder="Password" Text="{Binding Password}"  Style="{StaticResource loginEntry}"/>
+            <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True" Style="{StaticResource loginEntry}"/>
             <Button Text="Login" Command="{Binding LoginCommand}"/>
         </StackLayout>
 
@@ -52,20 +52,22 @@
         </StackLayout>
         
         <StackLayout IsVisible="{Binding VmLayout}">
-            <CollectionView ItemsSource="{Binding Machines}">
+            <CollectionView ItemsSource="{Binding List}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <SwipeView>
                             <SwipeView.RightItems>
-                                <SwipeItem Text="Run"/>
                                 <SwipeItem Text="Delete" BackgroundColor="OrangeRed"/>
                             </SwipeView.RightItems>
                             <Frame>
-                                <Grid RowDefinitions="*, *" ColumnDefinitions="*, *" RowSpacing="5" ColumnSpacing="5">
-                                    <Label Text="{Binding Name, StringFormat='Name: {0}'}" Grid.Column="0" Grid.Row="0"/>
-                                    <Label Text="{Binding Tenant_id, StringFormat='Tenant id: {0}'}" Grid.Column="0" Grid.Row="1"/>
-                                    <Label Text="{Binding OS_type, StringFormat='OS: {0}'}" Grid.Column="1" Grid.Row="0"/>
-                                    <Label Text="{Binding Memory_size, StringFormat='Memory: {0}'}" Grid.Column="1" Grid.Row="1"/>
+                                <Grid RowDefinitions="*, *, *, *, *" ColumnDefinitions="*, *" RowSpacing="3" Padding="10">
+                                    <Label Text="{Binding Tenant_id, StringFormat='Tenant id: {0}'}" Grid.Row="0" Grid.Column="0"/>
+                                    <Label Text="{Binding Name, StringFormat='Names: {0}'}" Grid.Row="1" Grid.Column="0"/>
+                                    <Label Text="{Binding Subscription_plan, StringFormat='Subscription: {0}'}" Grid.Row="2" Grid.Column="0"/>
+                                    <Label Text="{Binding VM_names, StringFormat='VM Names: {0}'}" Grid.Row="0" Grid.Column="1"/>
+                                    <Label Text="{Binding OS_type, StringFormat='OS Type: {0}'}" Grid.Row="1" Grid.Column="1"/>
+                                    <Label Text="{Binding Memory_size, StringFormat='Memory Size: {0}'}" Grid.Row="2" Grid.Column="1"/>
+                                    <Label Text="{Binding Cpus, StringFormat='CPUs: {0}'}" Grid.Row="3" Grid.Column="0"/>
                                 </Grid>
                             </Frame>
                         </SwipeView>
