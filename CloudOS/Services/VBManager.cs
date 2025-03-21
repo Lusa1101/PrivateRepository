@@ -5,12 +5,14 @@ namespace CloudOS.Services
 {
     public class VBManager
     {
+        //Functions class
+        Functions functions = new();
         public static string ExecuteVMCommand(string query)
         {
             Process vmProcess = new Process();
-            vmProcess.StartInfo.FileName = "VBoxManage";
+            vmProcess.StartInfo.FileName = @"C:\Program Files\Oracle\VirtualBox\VBoxManage.exe";
             vmProcess.StartInfo.Arguments = query;
-            vmProcess.StartInfo.UseShellExecute = true;
+            vmProcess.StartInfo.UseShellExecute = false;
             vmProcess.StartInfo.RedirectStandardOutput = true;
             vmProcess.StartInfo.RedirectStandardError = true;
             vmProcess.StartInfo.CreateNoWindow = true;
@@ -30,7 +32,7 @@ namespace CloudOS.Services
             return output;
         }
 
-        public string CreateVM(string vmName, string vdiName = "CorePlus", string controllerName = "SATA Controller", string osType = "ubuntu_64", int memoryMB = 512, int cpus = 2, int hdSize = 5120)
+        public (string output, string uuid) CreateVM(string vmName, string vdiName = "CorePlus", string controllerName = "SATA Controller", string osType = "ubuntu_64", int memoryMB = 512, int cpus = 2, int hdSize = 5120)
         {
             string path = "C:\\Users\\omphu\\Documents\\Brony\\CorePlus\\";
             string vdiPath = Path.Combine(path, $"{vdiName}.vdi");
@@ -47,7 +49,7 @@ namespace CloudOS.Services
             // 1. Validate ISO File Existence
             if (!File.Exists(isoPath))
             {
-                return $"Error: ISO file not found at {isoPath}";
+                return ($"Error: ISO file not found at {isoPath}", "");
             }
 
             // 2. Create the Virtual Machine
@@ -58,47 +60,50 @@ namespace CloudOS.Services
                 Directory.CreateDirectory(basefolder);
             string createCommand = $"createvm --name \"{vmName}\" --basefolder {basefolder} --ostype {osType} --register";    
             output = ExecuteVMCommand(createCommand);
-            if (HasErrors(output)) return "Error: Failed to create VM.";
+            if (HasErrors(output)) return ("Error: Failed to create VM.", "");
+
+            //Get the UUID
+            string UUID = functions.ReturnVMUUID(output);
 
             // 3. Configure VM Memory and CPUs
             string modifyCommand = $"modifyvm \"{vmName}\" --memory {memoryMB} --cpus {cpus} --boot1 dvd --nic1 nat"; // Basic settings
             output = ExecuteVMCommand(modifyCommand);
-            if (HasErrors(output)) return "Error: Failed to configure VM settings.";
+            if (HasErrors(output)) return (("Error: Failed to configure VM settings.", ""));
 
             // 4. Create Virtual Disk if It Doesn't Exist
             if (!File.Exists(vdiPath))
             {
                 string createHDD = $"createhd --filename \"{vdiPath}\" --size {hdSize}";
                 output = ExecuteVMCommand(createHDD);
-                if (HasErrors(output)) return "Error: Failed to create virtual disk.";
+                if (HasErrors(output)) return ("Error: Failed to create virtual disk.", "");
             }
 
             // 5. Add SATA Controller for Virtual Disk
             string attachCommand = $"storagectl \"{vmName}\" --name \"{controllerName}\" --add sata --controller IntelAhci";
             output = ExecuteVMCommand(attachCommand);
-            if (HasErrors(output)) return "Error: Failed to attach SATA controller.";
+            if (HasErrors(output)) return ("Error: Failed to attach SATA controller.", "");
 
             // 6. Attach Virtual Disk to SATA Controller
             string attachDiskCommand = $"storageattach \"{vmName}\" --storagectl \"{controllerName}\" --port 0 --device 0 --type hdd --medium \"{vdiPath}\"";
             output = ExecuteVMCommand(attachDiskCommand);
-            if (HasErrors(output)) return "Error: Failed to attach virtual disk.";
+            if (HasErrors(output)) return ("Error: Failed to attach virtual disk.", "");
 
             // 7. Add IDE Controller for ISO Attachment
             string ideCommand = $"storagectl \"{vmName}\" --name \"IDE Controller\" --add ide";
             output = ExecuteVMCommand(ideCommand);
-            if (HasErrors(output)) return "Error: Failed to attach IDE controller.";
+            if (HasErrors(output)) return ("Error: Failed to attach IDE controller.", "");
 
             // 8. Attach ISO File to IDE Controller
             string ideAttachCommand = $"storageattach \"{vmName}\" --storagectl \"IDE Controller\" --port 0 --device 0 --type dvddrive --medium \"{isoPath}\"";
             output = ExecuteVMCommand(ideAttachCommand);
-            if (HasErrors(output)) return "Error: Failed to attach ISO file.";
+            if (HasErrors(output)) return ("Error: Failed to attach ISO file.", "");
 
             // 9. Set Boot Order to Boot from DVD First
             string bootCommand = $"modifyvm \"{vmName}\" --boot1 dvd --boot2 disk";
             output = ExecuteVMCommand(bootCommand);
-            if (HasErrors(output)) return "Error: Failed to set boot order.";
+            if (HasErrors(output)) return ("Error: Failed to set boot order.", "");
 
-            return "Success: Virtual Machine created successfully!";
+            return ("Success: Virtual Machine created successfully!", UUID);
         }
 
         /***    End of Create VM    ***/

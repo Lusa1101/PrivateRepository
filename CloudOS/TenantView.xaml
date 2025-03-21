@@ -110,25 +110,24 @@
             <StackLayout IsVisible="{Binding TenantLayout}" Spacing="20" Padding="10">
                 <Label Text="Tenants" FontSize="Medium" HorizontalOptions="Center"/>
 
-                <HorizontalStackLayout Spacing="20">
-                    <Entry Placeholder="Tenant Name" Text="{Binding TenantName}" PlaceholderColor="Black" BackgroundColor="WhiteSmoke"/>
-                    <Picker BackgroundColor="WhiteSmoke" ItemsSource="{Binding Plans}" SelectedItem="{Binding SelectedPlan}"/>
-                    <Button Text="Add" Command="{Binding AddTenantCommand}"/>
+                <HorizontalStackLayout Spacing="10">
+                    <Entry Placeholder="Tenant Name" Text="{Binding TenantName}" PlaceholderColor="Black" BackgroundColor="WhiteSmoke" WidthRequest="120"/>
+                    <Picker BackgroundColor="WhiteSmoke" ItemsSource="{Binding Plans}" SelectedItem="{Binding SelectedPlan}" WidthRequest="120"/>
+                    <Button Text="Add" Command="{Binding AddTenantCommand}" WidthRequest="70"/>
                 </HorizontalStackLayout>
 
-                <CollectionView ItemsSource="{Binding Tenants}">
+                <CollectionView ItemsSource="{Binding Tenants}" SelectionMode="Single" SelectedItem="{Binding Source={RelativeSource AncestorType={x:Type vm:TenantViewModel}}, Path = CurrentTenant}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <SwipeView>
                                 <SwipeView.RightItems>
-                                    <SwipeItem Text="Delete" BackgroundColor="OrangeRed"/>
+                                    <SwipeItem Text="Delete" BackgroundColor="OrangeRed" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TenantViewModel}}, Path = DeleteTenantCommand}" CommandParameter="{Binding .}"/>
                                 </SwipeView.RightItems>
                                 <Frame>
-                                    <HorizontalStackLayout Spacing="10">
-                                        <Label Text="{Binding Tenant_id}"/>
-                                        <Label Text="{Binding Tenant_name}"/>
-                                        <Label Text="{Binding Subscription_plan}"/>
-                                    </HorizontalStackLayout>
+                                    <VerticalStackLayout Spacing="10">
+                                        <Label Text="{Binding Tenant_name, StringFormat='Name: {0}'}"/>
+                                        <Label Text="{Binding Subscription_plan, StringFormat='Subscription: {0}'}"/>
+                                    </VerticalStackLayout>
                                 </Frame>
                             </SwipeView>
                         </DataTemplate>
@@ -163,8 +162,10 @@
                         <DataTemplate>
                             <SwipeView>
                                 <SwipeView.RightItems>
-                                    <SwipeItem Text="Run" BackgroundColor="Green"/>
-                                    <SwipeItem Text="Delete" BackgroundColor="OrangeRed"/>
+                                    <SwipeItem Text="Run" BackgroundColor="Green"
+                                               Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TenantViewModel}}, Path = RunVMCommand}" CommandParameter="{Binding .}"/>
+                                    <SwipeItem Text="Delete" BackgroundColor="OrangeRed" 
+                                               Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TenantViewModel}}, Path = DeleteVMCommand}" CommandParameter="{Binding .}"/>
                                 </SwipeView.RightItems>
                                 <Frame>
                                     <Grid RowDefinitions="*, *" ColumnDefinitions="*, *" RowSpacing="5" ColumnSpacing="5">

@@ -98,7 +98,7 @@ namespace CloudOS.ViewModels
 
         /***        End of Login    ***/
 
-        //Variables for the Tenants
+        //***       Variables for the Tenants       ***/
         [ObservableProperty]
         ObservableCollection<string> plans = new();
         [ObservableProperty]
@@ -110,9 +110,16 @@ namespace CloudOS.ViewModels
         [ObservableProperty]
         string? tenantName;
 
-        public ICommand AddTenantCommand { get; }
+        //Selected tenant
+        [ObservableProperty]
+        Tenant currentTenant = new();
 
-        //Variables for Virtual Machines
+        public ICommand AddTenantCommand { get; }
+        public ICommand DeleteTenantCommand { get; }
+
+        /***        End of Tenants      ***/
+
+        //***       Variables for Virtual Machines          ***/
         [ObservableProperty]
         ObservableCollection<string> osTypes = new();
         [ObservableProperty]
@@ -126,9 +133,16 @@ namespace CloudOS.ViewModels
         string? cpus;
 
         public ICommand AddVMCommand { get; }
+        public ICommand DeleteVMCommand { get; }
+        public ICommand RunVMCommand { get; }
 
         [ObservableProperty]
         ObservableCollection<Virtual_Machine> machines = new();
+
+        //VMs for the current tenant
+
+
+        /***        End of Virtual Machines     ***/
 
         public TenantViewModel()
         {
@@ -136,10 +150,17 @@ namespace CloudOS.ViewModels
             RegisterCommand = new Command(Register);
             LoginCommand = new Command(Login);
             AddTenantCommand = new Command(AddTenant);
+            DeleteTenantCommand = new Command<Tenant>(DeleteTenant);
             AddVMCommand = new Command(AddVM);
+            DeleteVMCommand = new Command<Virtual_Machine>(DeleteVM);
+            RunVMCommand = new Command<Virtual_Machine>(RunVM);
 
             //Set plans and tenants
             _ = SetData();
+
+            //For testing
+            Email = "thendo.mash@gmail.com";
+            Password = "@Th3ndo1";
         }
 
         async void AddVM()
@@ -152,11 +173,12 @@ namespace CloudOS.ViewModels
             vm.Name = Name;
             vm.OS_type = SelectedOSType;
             vm.CPUs = int.Parse(String.IsNullOrEmpty(Cpus) ? "-1" : Cpus);
+            vm.Tenant_id = CurrentTenant.Tenant_id;
 
             //We need to get the UUID and tenant_id
-            string vmReg = vbManager.CreateVM(vm.Name);
-            if (!vmReg.Contains("Error"))
-                vm.UUID = functions.ReturnVMUUID(vmReg);
+            string vmReg = vbManager.CreateVM(vm.Name).uuid;
+            if (vmReg != "")
+                vm.UUID = vmReg;
             else
             {
                 Debug.WriteLine("Failed to get UUID.");
@@ -165,9 +187,48 @@ namespace CloudOS.ViewModels
 
             //We can now add it to the DB
             if (await dbManager.AddVM(vm))
+            {
+                //Update the Machines list
+                Machines.Add(vm);
+
+                //Clear out the entries
+                Name = null;
+                Memory = null;
+                Cpus = null;
+
                 Debug.WriteLine("Successfully created the vm.");
+            }
             else
                 Debug.WriteLine("Unsuccessfully created the vm.");
+        }
+
+        async void DeleteVM(Virtual_Machine vm)
+        {
+            //Need to delete from the VB first
+            string result = "";
+            if (vm.Name != null)
+                result = vbManager.DeleteVM(vm.Name);
+
+            //Now delete from the DB
+            if (!result.Contains("Successful") && await dbManager.DeleteVM(vm))
+            {
+                //Remove from the list
+                Machines.Remove(vm);
+
+                Debug.WriteLine("VM was deleted: " + vm.Name);
+            }
+            else
+                Debug.WriteLine("Failed to delete VM: " + vm.Name);
+
+        }
+
+        void RunVM(Virtual_Machine vm)
+        {
+            //Simply run through VB
+            if (vm.Name != null)
+                vbManager.StartVM(vm.Name);
+            else
+                Debug.WriteLine("The vm name was null.");
         }
 
         async void AddTenant()
@@ -177,19 +238,37 @@ namespace CloudOS.ViewModels
                 Tenant tenant = new Tenant();
                 tenant.Tenant_name = TenantName;
                 tenant.Subscription_plan = SelectedPlan;
+                tenant.Client_id = Client_id;
 
                 //Add the tenant to the DB
                 if (await dbManager.AddTenant(tenant))
-                    Debug.WriteLine("Added tenant successfully");
-                else
-                    Debug.WriteLine("Added tenant unsuccessfully");
+                {
+                    //Clear out the entriy
+                    TenantName = null;
 
-                //Add to the tenants
-                Tenants.Add(tenant);
+                    //Refresh the list
+                    //Add to the tenants
+                    Tenants.Add(tenant);
+
+                    Debug.WriteLine("Added tenant successfully");
+                }
+                else
+                    Debug.WriteLine("Added tenant unsuccessfully");                
             }
             else
                 Debug.WriteLine("Please fill in the TenantName and Select an option");
 
+        }
+
+        async void DeleteTenant(Tenant tenant)
+        {
+            if (await dbManager.DeleteTenant(tenant.Tenant_id))
+            {
+                //Remove from the list
+                Tenants.Remove(tenant);
+            }
+            else
+                Debug.WriteLine("Failed to delete.");
         }
 
         //Login method
@@ -202,7 +281,10 @@ namespace CloudOS.ViewModels
 
                 if (Client_id > 0)
                 {
-                    //Initiate the layout
+                    //Clear out the entries
+                    Email = null;
+                    Password = null;
+
                     //Set data
                     await SetData();
 
@@ -289,12 +371,27 @@ namespace CloudOS.ViewModels
                 Tenants = new ObservableCollection<Tenant>(await dbManager.ReturnTenantsById(Client_id));
         }
 
+        void ResetLayouts()
+        {
+            RegisterLayout = false;
+            LoginLayout = false;
+            TenantLayout = false;
+            VmLayout = false;
+        }
+
+        /***        Changes made on the Observable-properties ***/
+
         //Changing through different layouts
         partial void OnSelectedOptionChanged(string? value)
         {
             if (Client_id > 0 || value == "Register" || value == "Login")
             {
+                //Reset the layouts
                 ResetLayouts();
+
+                //Refresh the data
+                _ = SetData();
+
                 switch (value)
                 {
                     case "Register":
@@ -314,16 +411,8 @@ namespace CloudOS.ViewModels
             }
             else
                 Debug.WriteLine("Please login.");
-            
-        }
-        void ResetLayouts()
-        {
-            RegisterLayout = false;
-            LoginLayout = false;
-            TenantLayout = false;
-            VmLayout = false;
-        }
 
+        }
         partial void OnCompanyTypeChanged(string? value)
         {
             if (value == "Personal")
@@ -344,6 +433,19 @@ namespace CloudOS.ViewModels
 
         partial void OnPersonalRegChanged(bool value)
             => CompanyReg = !value;
+
+        partial void OnCurrentTenantChanged(Tenant value)
+        {
+            //Set current layou to be VMLayout
+            ResetLayouts();
+            VmLayout = true;
+
+            Machines = new ObservableCollection<Virtual_Machine>(dbManager.ReturnVMById(CurrentTenant.Tenant_id).Result);
+
+            Debug.WriteLine("I got this far, " + value.Tenant_name);
+        }
+
+        /***        End of Changes made on the Observable-properties        ***/
 
 
         /***        Input Validation    ***/

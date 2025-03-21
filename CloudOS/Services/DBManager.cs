@@ -173,10 +173,20 @@ namespace CloudOS
             return result > 0;
         }
 
-        async Task<bool> DeleteVM(Virtual_Machine vm)
+        public async Task<bool> DeleteVM(Virtual_Machine vm)
         {
             int result = 0;
-            string query = $"delete from virtual_machine where UUID = {vm.UUID}";
+            string query = $"delete from virtual_machine where UUID = '{vm.UUID}'";
+
+            result = await ExecuteNonQueryAsync(query);
+
+            return result > 0;
+        }
+
+        public async Task<bool> DeleteTenant(int tenant_id)
+        {
+            int result = 0;
+            string query = $"delete from tenant where tenant_id = {tenant_id}";
 
             result = await ExecuteNonQueryAsync(query);
 
@@ -236,7 +246,7 @@ namespace CloudOS
             using (var connection = CreateConnection())
             {
                 await connection.OpenAsync();
-                string query = $"select tenant_id, subscription_plan from tenant where client_id = {client_id};";
+                string query = $"select tenant_id, tenant_name, subscription_plan from tenant where client_id = {client_id};";
                 var command = new NpgsqlCommand(query, connection);
                 using (NpgsqlDataReader reader = command.ExecuteReader())
                 {
@@ -244,7 +254,8 @@ namespace CloudOS
                     {
                         Tenant temp = new();
                         temp.Tenant_id = reader.GetInt32(0);
-                        temp.Subscription_plan = reader.GetString(1);
+                        temp.Tenant_name = reader.GetString(1);
+                        temp.Subscription_plan = reader.GetString(2);
 
                         //Add to the list
                         tenants.Add(temp);
@@ -262,6 +273,34 @@ namespace CloudOS
             {
                 await connection.OpenAsync();
                 string query = $"select uuid, name, os_type, memory_size, cpus from virtual_machine;";
+                var command = new NpgsqlCommand(query, connection);
+                using (NpgsqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Virtual_Machine vm = new();
+                        vm.UUID = reader.GetString(0);
+                        vm.Name = reader.GetString(1);
+                        vm.OS_type = reader.GetString(2);
+                        vm.Memory_size = reader.GetInt32(3);
+                        vm.CPUs = reader.GetInt32(4);
+
+                        //Add to the list
+                        vms.Add(vm);
+                    }
+                }
+            }
+
+            return vms;
+        }
+
+        public async Task<List<Virtual_Machine>> ReturnVMById(int tenant_id)
+        {
+            List<Virtual_Machine> vms = new();
+            using (var connection = CreateConnection())
+            {
+                await connection.OpenAsync();
+                string query = $"select uuid, name, os_type, memory_size, cpus from virtual_machine where tenant_id = {tenant_id};";
                 var command = new NpgsqlCommand(query, connection);
                 using (NpgsqlDataReader reader = command.ExecuteReader())
                 {
