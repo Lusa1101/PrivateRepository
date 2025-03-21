@@ -99,22 +99,22 @@ namespace CloudOS
 
             return (int)(await ExecuteScalarQueryAsync(query));
         }
-        async Task<int> ReturnNewCompanyID()
+        async Task<decimal> ReturnNewCompanyID(string contact)
         {
-            string query = "select max(company_id) from company;";
+            string query = $"select company_id from company where contact_no = '{contact}';";
 
-            return (int)(await ExecuteScalarQueryAsync(query));
+            return await ExecuteScalarQueryAsyncDec(query);
         }
 
         public async Task<bool> AddCompany(Company company, string password)
         {
             int result = 0;
             //Add the company
-            string companyQuery = "insert into company(name, registration_no, tax_no, address, contact_no, email) values ('{company.Name}', '{company.Registration_no}', '{company.Tax_no}', '{company.Address}', '{company.Contact_no}', '{company.Email}')";
+            string companyQuery = $"insert into company(name, registration_no, tax_no, address, contact_no, email) values ('{company.Name}', '{company.Registration_no}', '{company.Tax_no}', '{company.Address}', '{company.Contact_no}', '{company.Email}')";
             result = await ExecuteNonQueryAsync(companyQuery);
 
             //Add the client
-            int company_id = await ReturnNewCompanyID();
+            decimal company_id = (company.Contact_no != null)? (await ReturnNewCompanyID(company.Contact_no)) : 0;
             string clientQuery = $"insert into client (client_id, client_type, password) values ({company_id}, 'company', '{password}'); ";
             if (result > 0)
                 result = await ExecuteNonQueryAsync(clientQuery);

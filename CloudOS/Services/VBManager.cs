@@ -122,6 +122,12 @@ namespace CloudOS.Services
             return ExecuteVMCommand(command);
         }
 
+        public string SaveVM(string name)
+        {
+            string command = $"controlvm \"{name}\" savestate";
+            return ExecuteVMCommand(command);
+        }
+
         public string TakeSnapshot(string vmName, string snapshotName)
         {
             string command = $"snapshot \"{vmName}\" take \"{snapshotName}\"";

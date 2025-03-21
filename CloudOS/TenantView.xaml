@@ -164,9 +164,13 @@
                                 <SwipeView.RightItems>
                                     <SwipeItem Text="Run" BackgroundColor="Green"
                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TenantViewModel}}, Path = RunVMCommand}" CommandParameter="{Binding .}"/>
-                                    <SwipeItem Text="Delete" BackgroundColor="OrangeRed" 
-                                               Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TenantViewModel}}, Path = DeleteVMCommand}" CommandParameter="{Binding .}"/>
+                                    <SwipeItem Text="Pause" BackgroundColor="DarkOrange" 
+                                               Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TenantViewModel}}, Path = SaveVMCommand}" CommandParameter="{Binding .}"/>
                                 </SwipeView.RightItems>
+                                <SwipeView.LeftItems>
+                                    <SwipeItem Text="Delete" BackgroundColor="Red" 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TenantViewModel}}, Path = DeleteVMCommand}" CommandParameter="{Binding .}"/>
+                                </SwipeView.LeftItems>
                                 <Frame>
                                     <Grid RowDefinitions="*, *" ColumnDefinitions="*, *" RowSpacing="5" ColumnSpacing="5">
                                         <Label Text="{Binding Name, StringFormat='Name: {0}'}" Grid.Column="0" Grid.Row="0"/>

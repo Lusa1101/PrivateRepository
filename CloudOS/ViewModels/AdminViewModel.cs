@@ -86,7 +86,7 @@ namespace CloudOS.ViewModels
             //Set the current layout
             LoginLayout = true;
 
-            //Dummy data
+            //Fetch data
             SetData();
         }
 
@@ -141,12 +141,23 @@ namespace CloudOS.ViewModels
 
         partial void OnVmLayoutChanged(bool value)
         {
+            if (value)
+                SetData();
+
             if (vms != null)
                 List = new ObservableCollection<Object>(vms);
         }
 
+        partial void OnTenantLayoutChanged(bool value)
+        {
+            tenants = new();
+        }
+
         partial void OnSelectedOptionChanged(string? value)
         {
+            //Set data
+            SetData();
+
             switch (value)
             {
                 case "Approve":

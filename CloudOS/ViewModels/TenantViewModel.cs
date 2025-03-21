@@ -135,6 +135,7 @@ namespace CloudOS.ViewModels
         public ICommand AddVMCommand { get; }
         public ICommand DeleteVMCommand { get; }
         public ICommand RunVMCommand { get; }
+        public ICommand SaveVMCommand { get; }
 
         [ObservableProperty]
         ObservableCollection<Virtual_Machine> machines = new();
@@ -149,11 +150,14 @@ namespace CloudOS.ViewModels
             //Set the commands
             RegisterCommand = new Command(Register);
             LoginCommand = new Command(Login);
+
             AddTenantCommand = new Command(AddTenant);
             DeleteTenantCommand = new Command<Tenant>(DeleteTenant);
+
             AddVMCommand = new Command(AddVM);
             DeleteVMCommand = new Command<Virtual_Machine>(DeleteVM);
             RunVMCommand = new Command<Virtual_Machine>(RunVM);
+            SaveVMCommand = new Command<Virtual_Machine>(SaveVM);
 
             //Set plans and tenants
             _ = SetData();
@@ -227,6 +231,15 @@ namespace CloudOS.ViewModels
             //Simply run through VB
             if (vm.Name != null)
                 vbManager.StartVM(vm.Name);
+            else
+                Debug.WriteLine("The vm name was null.");
+        }
+
+        void SaveVM(Virtual_Machine vm)
+        {
+            //Save the current state of the vm and close it
+            if(vm.Name != null)
+                vbManager.SaveVM(vm.Name);
             else
                 Debug.WriteLine("The vm name was null.");
         }
@@ -351,6 +364,15 @@ namespace CloudOS.ViewModels
                             Debug.WriteLine("Registration was unsuccessful.");
 
                     }
+
+                    //Clear out the entries
+                    Text1 = null;
+                    Text2 = null;
+                    Text3 = null;
+                    Text4 = null;
+                    Text5 = null;
+                    Text6 = null;
+                    Password = null;
                 }
                 else
                     Debug.WriteLine("Please complete all the entries.");
@@ -366,9 +388,11 @@ namespace CloudOS.ViewModels
             OsTypes = new ObservableCollection<string>() { "Ubuntu_64", "Windows_64", "Debian_64", "Redhat_64" };
 
             //Retrieve required data from the database            
-            Machines = new ObservableCollection<Virtual_Machine>(await dbManager.ReturnVMs());
             if (Client_id > 0)
                 Tenants = new ObservableCollection<Tenant>(await dbManager.ReturnTenantsById(Client_id));
+
+            if(CurrentTenant.Tenant_id > 0)
+                Machines = new ObservableCollection<Virtual_Machine>(await dbManager.ReturnVMById(CurrentTenant.Tenant_id));
         }
 
         void ResetLayouts()
@@ -384,33 +408,43 @@ namespace CloudOS.ViewModels
         //Changing through different layouts
         partial void OnSelectedOptionChanged(string? value)
         {
-            if (Client_id > 0 || value == "Register" || value == "Login")
+            //We need to to reset the lists if value is login or register
+            if(value == "Register" || value == "Login")
             {
-                //Reset the layouts
-                ResetLayouts();
-
-                //Refresh the data
-                _ = SetData();
-
-                switch (value)
-                {
-                    case "Register":
-                        RegisterLayout = true;
-                        break;
-                    case "Virtual Machines":
-                        VmLayout = true;
-                        break;
-                    case "Tenants":
-                        TenantLayout = true;
-                        break;
-                    default:
-                        LoginLayout = true;
-                        break;
-
-                }
+                //This is the same as login out, so we need to restart the class
+                Client_id = -1;
+                CurrentTenant = new();
             }
-            else
-                Debug.WriteLine("Please login.");
+
+            //Reset the layouts
+            ResetLayouts();
+
+            switch (value)
+            {
+                case "Register":
+                    RegisterLayout = true;
+                    break;
+                case "Virtual Machines":
+                    if (CurrentTenant.Tenant_id > 0)
+                    {
+                        VmLayout = true;
+                    }
+                    else
+                        Debug.WriteLine("Please login or select a tenant.");
+                    break;
+                case "Tenants":
+                    if (Client_id > 0)
+                    {
+                        TenantLayout = true;
+                    }
+                    else
+                        Debug.WriteLine("Please login.");
+                    break;
+                default:
+                    LoginLayout = true;
+                    break;
+
+            }
 
         }
         partial void OnCompanyTypeChanged(string? value)
