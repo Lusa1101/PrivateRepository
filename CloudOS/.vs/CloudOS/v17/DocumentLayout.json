@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\omphu\\Documents\\Brony\\PrivateRepository\\CloudOS\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{19DA904D-C357-4B82-8FD6-7BC86F097FD0}|CloudOS.csproj|c:\\users\\omphu\\documents\\brony\\privaterepository\\cloudos\\services\\vbmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{19DA904D-C357-4B82-8FD6-7BC86F097FD0}|CloudOS.csproj|solutionrelative:services\\vbmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{19DA904D-C357-4B82-8FD6-7BC86F097FD0}|CloudOS.csproj|c:\\users\\omphu\\documents\\brony\\privaterepository\\cloudos\\viewmodels\\tenantviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{19DA904D-C357-4B82-8FD6-7BC86F097FD0}|CloudOS.csproj|solutionrelative:viewmodels\\tenantviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -21,10 +25,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{19DA904D-C357-4B82-8FD6-7BC86F097FD0}|CloudOS.csproj|c:\\users\\omphu\\documents\\brony\\privaterepository\\cloudos\\adminview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{19DA904D-C357-4B82-8FD6-7BC86F097FD0}|CloudOS.csproj|solutionrelative:adminview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{19DA904D-C357-4B82-8FD6-7BC86F097FD0}|CloudOS.csproj|c:\\users\\omphu\\documents\\brony\\privaterepository\\cloudos\\services\\vbmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{19DA904D-C357-4B82-8FD6-7BC86F097FD0}|CloudOS.csproj|solutionrelative:services\\vbmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{19DA904D-C357-4B82-8FD6-7BC86F097FD0}|CloudOS.csproj|c:\\users\\omphu\\documents\\brony\\privaterepository\\cloudos\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
@@ -62,7 +62,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 57,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -73,12 +73,8 @@
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "TenantViewModel.cs",
               "DocumentMoniker": "C:\\Users\\omphu\\Documents\\Brony\\PrivateRepository\\CloudOS\\ViewModels\\TenantViewModel.cs",
               "RelativeDocumentMoniker": "ViewModels\\TenantViewModel.cs",
@@ -91,7 +87,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "AdminViewModel.cs",
               "DocumentMoniker": "C:\\Users\\omphu\\Documents\\Brony\\PrivateRepository\\CloudOS\\ViewModels\\AdminViewModel.cs",
               "RelativeDocumentMoniker": "ViewModels\\AdminViewModel.cs",
@@ -99,8 +95,7 @@
               "RelativeToolTip": "ViewModels\\AdminViewModel.cs",
               "ViewState": "AgIAAGwAAAAAAAAAAAAAAIMAAABVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-14T17:32:12.843Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-14T17:32:12.843Z"
             },
             {
               "$type": "Document",
@@ -161,16 +156,20 @@
               "ViewState": "AQIAAAQAAAAAAAAAAADwvxAAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-14T15:36:32.711Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             }
           ]
         },
         {
           "DockedWidth": 61,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "TenantView.xaml",
               "DocumentMoniker": "C:\\Users\\omphu\\Documents\\Brony\\PrivateRepository\\CloudOS\\TenantView.xaml",
               "RelativeDocumentMoniker": "TenantView.xaml",
@@ -183,7 +182,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "DBManager.cs",
               "DocumentMoniker": "C:\\Users\\omphu\\Documents\\Brony\\PrivateRepository\\CloudOS\\Services\\DBManager.cs",
               "RelativeDocumentMoniker": "Services\\DBManager.cs",
@@ -191,25 +190,24 @@
               "RelativeToolTip": "Services\\DBManager.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAEwBIAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-20T05:22:50.941Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-20T05:22:50.941Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "VBManager.cs",
               "DocumentMoniker": "C:\\Users\\omphu\\Documents\\Brony\\PrivateRepository\\CloudOS\\Services\\VBManager.cs",
               "RelativeDocumentMoniker": "Services\\VBManager.cs",
               "ToolTip": "C:\\Users\\omphu\\Documents\\Brony\\PrivateRepository\\CloudOS\\Services\\VBManager.cs",
               "RelativeToolTip": "Services\\VBManager.cs",
-              "ViewState": "AgIAADMAAAAAAAAAAADwvz8AAAA3AAAAAAAAAA==",
+              "ViewState": "AgIAAA0AAAAAAAAAAADwvz8AAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-20T05:35:42.081Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "AdminView.xaml",
               "DocumentMoniker": "C:\\Users\\omphu\\Documents\\Brony\\PrivateRepository\\CloudOS\\AdminView.xaml",
               "RelativeDocumentMoniker": "AdminView.xaml",
@@ -217,8 +215,7 @@
               "RelativeToolTip": "AdminView.xaml",
               "ViewState": "AgIAABIAAAAAAAAAAAAAABsAAABbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-03-14T15:37:01.219Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-14T15:37:01.219Z"
             },
             {
               "$type": "Document",
@@ -242,8 +239,7 @@
               "RelativeToolTip": "MainPage.xaml",
               "ViewState": "AgIAABsAAAAAAAAAAAAAADIAAABOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-03-14T14:15:44.442Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-14T14:15:44.442Z"
             }
           ]
         }
