@@ -34,10 +34,17 @@ namespace CloudOS.Services
 
         public (string output, string uuid) CreateVM(string vmName, string vdiName = "CorePlus", string controllerName = "SATA Controller", string osType = "ubuntu_64", int memoryMB = 512, int cpus = 2, int hdSize = 5120)
         {
-            string path = "C:\\Users\\omphu\\Documents\\Brony\\CorePlus\\";
-            string vdiPath = Path.Combine(path, $"{vdiName}.vdi");
-            string isoPath = Path.Combine(path, "CorePlus-current.iso");
-            string basefolder = $"C:\\Users\\omphu\\Documents\\Brony\\VM\\";
+            string? path = Environment.GetEnvironmentVariable("CLOUD_OS_PATH", EnvironmentVariableTarget.User); //"C:\\Users\\omphu\\Documents\\Brony\\CorePlus\\";
+            string vdiPath, isoPath, basefolder;
+            if (path != null)
+            {
+                vdiPath = Path.Combine(path, $"CorePlus\\{vdiName}.vdi");
+                isoPath = Path.Combine(path, "CorePlus\\CorePlus-current.iso");
+                basefolder = Path.Combine(path, "VM\\");
+            }
+            else
+                return ("Error: Failed to get path to the project folder", "");
+
             string output;
 
             // Helper function to detect specific error patterns

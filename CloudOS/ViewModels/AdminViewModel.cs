@@ -85,9 +85,6 @@ namespace CloudOS.ViewModels
 
             //Set the current layout
             LoginLayout = true;
-
-            //Fetch data
-            SetData();
         }
 
         async void Approve(Client_view client)
@@ -115,6 +112,10 @@ namespace CloudOS.ViewModels
             if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
             {
                 //Authentication
+                dbMananger = new DBManager(username: Username, password: Password);
+
+                //Fetch data
+                SetData();
 
                 //Set login layout to false if authorized
                 LoginLayout = false;
@@ -137,6 +138,13 @@ namespace CloudOS.ViewModels
         {
             //Disable the options
             HomeLayout = !value;
+
+            if(!HomeLayout)
+            {
+                clients = new();
+                tenants = new();
+                vms = new();
+            }
         }
 
         partial void OnVmLayoutChanged(bool value)
@@ -234,9 +242,19 @@ namespace CloudOS.ViewModels
 
         async void SetData()
         {
-            clients = new ObservableCollection<Client_view>(await dbMananger.ReturnClientViews());
-            tenants = new ObservableCollection<Tenant_view>(await dbMananger.ReturnTenantViews());
-            vms = new ObservableCollection<VM_view>(await dbMananger.ReturnVMViews());
+            try
+            {
+                clients = new ObservableCollection<Client_view>(await dbMananger.ReturnClientViews());
+                tenants = new ObservableCollection<Tenant_view>(await dbMananger.ReturnTenantViews());
+                vms = new ObservableCollection<VM_view>(await dbMananger.ReturnVMViews());
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+
+                //Do not allow login
+                LoginLayout = true;
+            }
 
             //Set os_Types and machines
             OsTypes = new ObservableCollection<string>() { "Ubuntu_64", "Windows_64", "Debian_64", "Redhat_64" };

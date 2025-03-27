@@ -30,13 +30,13 @@ namespace CloudOS.ViewModels
 
         //Layouts' visibilities
         [ObservableProperty]
-        bool registerLayout = false;
+        bool registerLayout;
         [ObservableProperty]
-        bool loginLayout = false;
+        bool loginLayout;
         [ObservableProperty]
-        bool tenantLayout = false;
+        bool tenantLayout;
         [ObservableProperty]
-        bool vmLayout = false;
+        bool vmLayout;
 
         [ObservableProperty]
         string? selectedOption;
@@ -159,6 +159,9 @@ namespace CloudOS.ViewModels
             RunVMCommand = new Command<Virtual_Machine>(RunVM);
             SaveVMCommand = new Command<Virtual_Machine>(SaveVM);
 
+            //Layouts to false
+            ResetLayouts();
+
             //Set plans and tenants
             _ = SetData();
 
@@ -176,7 +179,8 @@ namespace CloudOS.ViewModels
             Virtual_Machine vm = new Virtual_Machine();
             vm.Name = Name;
             vm.OS_type = SelectedOSType;
-            vm.CPUs = int.Parse(String.IsNullOrEmpty(Cpus) ? "-1" : Cpus);
+            vm.CPUs = int.Parse(String.IsNullOrEmpty(Cpus) ? "2" : Cpus);
+            vm.Memory_size = int.Parse(String.IsNullOrEmpty(Memory) ? "256" : Memory);
             vm.Tenant_id = CurrentTenant.Tenant_id;
 
             //We need to get the UUID and tenant_id
@@ -339,7 +343,18 @@ namespace CloudOS.ViewModels
 
                         //Add to the database
                         if (await dbManager.AddPerson(person, Password))
+                        {
                             Debug.WriteLine("Successfully registered. Please wait for approval.");
+
+                            //Clear out the entries
+                            Text1 = null;
+                            Text2 = null;
+                            Text3 = null;
+                            Text4 = null;
+                            Text5 = null;
+                            Text6 = null;
+                            Password = null;
+                        }
                         else
                             Debug.WriteLine("Registration was unsuccessful.");
                     }
@@ -359,20 +374,22 @@ namespace CloudOS.ViewModels
 
                         //Add to the DB
                         if (await dbManager.AddCompany(company, Password))
+                        {
                             Debug.WriteLine("Successfully registered. Please wait for approval.");
+
+                            //Clear out the entries
+                            Text1 = null;
+                            Text2 = null;
+                            Text3 = null;
+                            Text4 = null;
+                            Text5 = null;
+                            Text6 = null;
+                            Password = null;
+                        }
                         else
                             Debug.WriteLine("Registration was unsuccessful.");
 
                     }
-
-                    //Clear out the entries
-                    Text1 = null;
-                    Text2 = null;
-                    Text3 = null;
-                    Text4 = null;
-                    Text5 = null;
-                    Text6 = null;
-                    Password = null;
                 }
                 else
                     Debug.WriteLine("Please complete all the entries.");
@@ -389,7 +406,10 @@ namespace CloudOS.ViewModels
 
             //Retrieve required data from the database            
             if (Client_id > 0)
+            {
                 Tenants = new ObservableCollection<Tenant>(await dbManager.ReturnTenantsById(Client_id));
+                Tenants.Add(new Tenant());
+            }
 
             if(CurrentTenant.Tenant_id > 0)
                 Machines = new ObservableCollection<Virtual_Machine>(await dbManager.ReturnVMById(CurrentTenant.Tenant_id));
@@ -406,16 +426,14 @@ namespace CloudOS.ViewModels
         /***        Changes made on the Observable-properties ***/
 
         //Changing through different layouts
+        void ResetValues()
+        {
+            //This is the same as login out, so we need to restart the class
+            Client_id = -1;
+            //CurrentTenant = Tenants.FirstOrDefault(temp => temp.Tenant_id == -1);
+        }
         partial void OnSelectedOptionChanged(string? value)
         {
-            //We need to to reset the lists if value is login or register
-            if(value == "Register" || value == "Login")
-            {
-                //This is the same as login out, so we need to restart the class
-                Client_id = -1;
-                CurrentTenant = new();
-            }
-
             //Reset the layouts
             ResetLayouts();
 
@@ -423,6 +441,7 @@ namespace CloudOS.ViewModels
             {
                 case "Register":
                     RegisterLayout = true;
+                    ResetValues();
                     break;
                 case "Virtual Machines":
                     if (CurrentTenant.Tenant_id > 0)
@@ -442,6 +461,7 @@ namespace CloudOS.ViewModels
                     break;
                 default:
                     LoginLayout = true;
+                    ResetValues();
                     break;
 
             }
@@ -468,15 +488,13 @@ namespace CloudOS.ViewModels
         partial void OnPersonalRegChanged(bool value)
             => CompanyReg = !value;
 
-        partial void OnCurrentTenantChanged(Tenant value)
+        partial void OnCurrentTenantChanged(Tenant? oldValue, Tenant newValue)
         {
-            //Set current layou to be VMLayout
-            ResetLayouts();
-            VmLayout = true;
-
-            Machines = new ObservableCollection<Virtual_Machine>(dbManager.ReturnVMById(CurrentTenant.Tenant_id).Result);
-
-            Debug.WriteLine("I got this far, " + value.Tenant_name);
+            if (oldValue == newValue || oldValue != newValue)
+            {
+                SelectedOption = "Virtual Machines";
+                Machines = new ObservableCollection<Virtual_Machine>(dbManager.ReturnVMById(CurrentTenant.Tenant_id).Result);
+            }
         }
 
         /***        End of Changes made on the Observable-properties        ***/

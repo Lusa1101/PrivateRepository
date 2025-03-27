@@ -8,6 +8,10 @@ namespace CloudOS.Models
 {
     internal class Tenant
     {
+        public Tenant() 
+        {
+            Tenant_id = -1;
+        }
         public int Tenant_id { get; set; }
         public decimal Client_id { get; set; }
         public string? Tenant_name { get; set; }

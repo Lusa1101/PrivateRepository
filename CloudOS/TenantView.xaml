@@ -26,6 +26,7 @@
     <ScrollView>
         <VerticalStackLayout Spacing="10" Padding="10">
             <Picker ItemsSource="{StaticResource PickerItems}" SelectedItem="{Binding SelectedOption}"/>
+            
             <StackLayout IsVisible="{Binding RegisterLayout}" Spacing="10" Padding="20">
                 <Label Text="Registration" FontSize="Medium" HorizontalOptions="Center"/>
 

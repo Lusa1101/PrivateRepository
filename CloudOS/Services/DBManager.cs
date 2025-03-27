@@ -10,10 +10,12 @@ namespace CloudOS
     {
         private string? _connectionString;
 
-        public DBManager()
+        public DBManager(string username = "application", string password = "application")
         {
-            _connectionString = Environment.GetEnvironmentVariable("POSTGRES_CONNECTION_STRING", EnvironmentVariableTarget.User);
-            
+            //Use the admin's PSQL credentials for accessing the db
+            //Must have login credentials that are default for the application
+            _connectionString = $"Host=localhost;Port=5432;Database=cloud_os;Username={username};Password={password};";
+
         }
 
         public NpgsqlConnection CreateConnection()

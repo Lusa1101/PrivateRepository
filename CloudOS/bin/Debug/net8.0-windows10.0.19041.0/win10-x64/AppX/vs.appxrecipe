@@ -29,7 +29,7 @@
     <AppXManifest Include="C:\Users\omphu\Documents\Brony\PrivateRepository\CloudOS\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2025-03-21T07:01:32.758</Modified>
+      <Modified>2025-03-27T03:07:06.155</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
@@ -43,11 +43,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\PrivateRepository\CloudOS\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\CloudOS.dll">
       <PackagePath>CloudOS.dll</PackagePath>
-      <Modified>2025-03-21T07:01:31.894</Modified>
+      <Modified>2025-03-27T03:07:05.374</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\PrivateRepository\CloudOS\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>CloudOS.exe</PackagePath>
-      <Modified>2025-03-21T07:01:31.909</Modified>
+      <Modified>2025-03-27T03:07:05.383</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\omphu\Documents\Brony\PrivateRepository\CloudOS\Resources\Raw\AboutAssets.txt">
       <PackagePath>AboutAssets.txt</PackagePath>
