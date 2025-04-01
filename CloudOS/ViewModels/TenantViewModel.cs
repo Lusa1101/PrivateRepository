@@ -264,8 +264,7 @@ namespace CloudOS.ViewModels
                     TenantName = null;
 
                     //Refresh the list
-                    //Add to the tenants
-                    Tenants.Add(tenant);
+                    Tenants = new ObservableCollection<Tenant>(await dbManager.ReturnTenantsById(Client_id));
 
                     Debug.WriteLine("Added tenant successfully");
                 }
@@ -408,7 +407,6 @@ namespace CloudOS.ViewModels
             if (Client_id > 0)
             {
                 Tenants = new ObservableCollection<Tenant>(await dbManager.ReturnTenantsById(Client_id));
-                Tenants.Add(new Tenant());
             }
 
             if(CurrentTenant.Tenant_id > 0)
@@ -490,11 +488,8 @@ namespace CloudOS.ViewModels
 
         partial void OnCurrentTenantChanged(Tenant? oldValue, Tenant newValue)
         {
-            if (oldValue == newValue || oldValue != newValue)
-            {
-                SelectedOption = "Virtual Machines";
-                Machines = new ObservableCollection<Virtual_Machine>(dbManager.ReturnVMById(CurrentTenant.Tenant_id).Result);
-            }
+            SelectedOption = "Virtual Machines";
+            Machines = new ObservableCollection<Virtual_Machine>(dbManager.ReturnVMById(CurrentTenant.Tenant_id).Result);
         }
 
         /***        End of Changes made on the Observable-properties        ***/

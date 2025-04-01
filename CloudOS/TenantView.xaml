@@ -117,7 +117,7 @@
                     <Button Text="Add" Command="{Binding AddTenantCommand}" WidthRequest="70"/>
                 </HorizontalStackLayout>
 
-                <CollectionView ItemsSource="{Binding Tenants}" SelectionMode="Single" SelectedItem="{Binding Source={RelativeSource AncestorType={x:Type vm:TenantViewModel}}, Path = CurrentTenant}">
+                <CollectionView ItemsSource="{Binding Tenants}" SelectionMode="Single" SelectedItem="{Binding Source={RelativeSource AncestorType={x:Type vm:TenantViewModel}}, Path = CurrentTenant, Mode=TwoWay}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <SwipeView>

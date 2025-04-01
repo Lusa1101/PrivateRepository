@@ -211,7 +211,6 @@ namespace CloudOS
         public async Task<decimal> Authenticate(string email, string password)
         {
             decimal result = -1;
-            Client client = new();
             string query = $"select client_id from client_auth_view where approved = '1' AND email = '{email}' AND password = '{password}';";
             result = await ExecuteScalarQueryAsyncDec(query);
 
