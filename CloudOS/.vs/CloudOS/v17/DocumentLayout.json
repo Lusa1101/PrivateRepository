@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\omphu\\Documents\\Brony\\PrivateRepository\\CloudOS\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{19DA904D-C357-4B82-8FD6-7BC86F097FD0}|CloudOS.csproj|c:\\users\\omphu\\documents\\brony\\privaterepository\\cloudos\\services\\dbmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{19DA904D-C357-4B82-8FD6-7BC86F097FD0}|CloudOS.csproj|solutionrelative:services\\dbmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{19DA904D-C357-4B82-8FD6-7BC86F097FD0}|CloudOS.csproj|c:\\users\\omphu\\documents\\brony\\privaterepository\\cloudos\\viewmodels\\tenantviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{19DA904D-C357-4B82-8FD6-7BC86F097FD0}|CloudOS.csproj|solutionrelative:viewmodels\\tenantviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -21,10 +25,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{19DA904D-C357-4B82-8FD6-7BC86F097FD0}|CloudOS.csproj|c:\\users\\omphu\\documents\\brony\\privaterepository\\cloudos\\tenantview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{19DA904D-C357-4B82-8FD6-7BC86F097FD0}|CloudOS.csproj|solutionrelative:tenantview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{19DA904D-C357-4B82-8FD6-7BC86F097FD0}|CloudOS.csproj|c:\\users\\omphu\\documents\\brony\\privaterepository\\cloudos\\services\\dbmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{19DA904D-C357-4B82-8FD6-7BC86F097FD0}|CloudOS.csproj|solutionrelative:services\\dbmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{19DA904D-C357-4B82-8FD6-7BC86F097FD0}|CloudOS.csproj|c:\\users\\omphu\\documents\\brony\\privaterepository\\cloudos\\tenantview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -74,20 +74,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "TenantViewModel.cs",
               "DocumentMoniker": "C:\\Users\\omphu\\Documents\\Brony\\PrivateRepository\\CloudOS\\ViewModels\\TenantViewModel.cs",
               "RelativeDocumentMoniker": "ViewModels\\TenantViewModel.cs",
               "ToolTip": "C:\\Users\\omphu\\Documents\\Brony\\PrivateRepository\\CloudOS\\ViewModels\\TenantViewModel.cs",
               "RelativeToolTip": "ViewModels\\TenantViewModel.cs",
-              "ViewState": "AgIAADMBAAAAAAAAAAAAAEYBAAB+AAAAAAAAAA==",
+              "ViewState": "AgIAAKoBAAAAAAAAAAAAALUBAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-14T17:32:33.255Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "AdminViewModel.cs",
               "DocumentMoniker": "C:\\Users\\omphu\\Documents\\Brony\\PrivateRepository\\CloudOS\\ViewModels\\AdminViewModel.cs",
               "RelativeDocumentMoniker": "ViewModels\\AdminViewModel.cs",
@@ -100,7 +100,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Functions.cs",
               "DocumentMoniker": "C:\\Users\\omphu\\Documents\\Brony\\PrivateRepository\\CloudOS\\Functions.cs",
               "RelativeDocumentMoniker": "Functions.cs",
@@ -108,12 +108,11 @@
               "RelativeToolTip": "Functions.cs",
               "ViewState": "AgIAAFoAAAAAAAAAAAAQwF0AAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-16T08:24:35.894Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-16T08:24:35.894Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "MainViewModel.cs",
               "DocumentMoniker": "C:\\Users\\omphu\\Documents\\Brony\\PrivateRepository\\CloudOS\\ViewModels\\MainViewModel.cs",
               "RelativeDocumentMoniker": "ViewModels\\MainViewModel.cs",
@@ -121,8 +120,7 @@
               "RelativeToolTip": "ViewModels\\MainViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-18T18:59:29.308Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-18T18:59:29.308Z"
             },
             {
               "$type": "Document",
@@ -164,11 +162,11 @@
         },
         {
           "DockedWidth": 59,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "TenantView.xaml",
               "DocumentMoniker": "C:\\Users\\omphu\\Documents\\Brony\\PrivateRepository\\CloudOS\\TenantView.xaml",
               "RelativeDocumentMoniker": "TenantView.xaml",
@@ -181,15 +179,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "DBManager.cs",
               "DocumentMoniker": "C:\\Users\\omphu\\Documents\\Brony\\PrivateRepository\\CloudOS\\Services\\DBManager.cs",
               "RelativeDocumentMoniker": "Services\\DBManager.cs",
               "ToolTip": "C:\\Users\\omphu\\Documents\\Brony\\PrivateRepository\\CloudOS\\Services\\DBManager.cs",
               "RelativeToolTip": "Services\\DBManager.cs",
-              "ViewState": "AgIAAMYAAAAAAAAAAADwv9UAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAALsAAAAAAAAAAAAwwMsAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-20T05:22:50.941Z"
+              "WhenOpened": "2025-03-20T05:22:50.941Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",

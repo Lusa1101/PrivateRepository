@@ -78,9 +78,9 @@
               "Title": "TenantViewModel.cs",
               "DocumentMoniker": "C:\\Users\\omphu\\Documents\\Brony\\PrivateRepository\\CloudOS\\ViewModels\\TenantViewModel.cs",
               "RelativeDocumentMoniker": "ViewModels\\TenantViewModel.cs",
-              "ToolTip": "C:\\Users\\omphu\\Documents\\Brony\\PrivateRepository\\CloudOS\\ViewModels\\TenantViewModel.cs",
-              "RelativeToolTip": "ViewModels\\TenantViewModel.cs",
-              "ViewState": "AgIAADMBAAAAAAAAAAAAAEYBAAB+AAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\omphu\\Documents\\Brony\\PrivateRepository\\CloudOS\\ViewModels\\TenantViewModel.cs*",
+              "RelativeToolTip": "ViewModels\\TenantViewModel.cs*",
+              "ViewState": "AgIAAKoBAAAAAAAAAAAAALUBAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-14T17:32:33.255Z",
               "EditorCaption": ""
@@ -108,8 +108,7 @@
               "RelativeToolTip": "Functions.cs",
               "ViewState": "AgIAAFoAAAAAAAAAAAAQwF0AAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-16T08:24:35.894Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-16T08:24:35.894Z"
             },
             {
               "$type": "Document",
@@ -121,8 +120,7 @@
               "RelativeToolTip": "ViewModels\\MainViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-18T18:59:29.308Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-18T18:59:29.308Z"
             },
             {
               "$type": "Document",

@@ -145,6 +145,11 @@ namespace CloudOS.ViewModels
 
         /***        End of Virtual Machines     ***/
 
+        /***
+         * List to keep track of the number of times the current email attempts to login
+         * **/
+        List<string> Emails = new();
+
         public TenantViewModel()
         {
             //Set the commands
@@ -303,11 +308,23 @@ namespace CloudOS.ViewModels
         {
             if (!string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Password))
             {
+                //Track the number of attepts made
+                if(TrackLoginAttempts(Email))
+                {
+                    if (Application.Current != null && Application.Current.MainPage != null)
+                        await Application.Current.MainPage.DisplayAlert("Client", "Your account has been blocked. Please contact admin.", "Okay");
+
+                    return;
+                }
+
                 //Authenticate and get the current cliwnt details
                 Client_id = await dbManager.Authenticate(Email, Password);
 
                 if (Client_id > 0)
                 {
+                    //Clear out the Emails list
+                    Emails.Clear();
+
                     //Clear out the entries
                     Email = null;
                     Password = null;
@@ -410,6 +427,17 @@ namespace CloudOS.ViewModels
                         await Application.Current.MainPage.DisplayAlert("Client", "Please complete all the entries.", "Okay");
 
             
+        }
+
+        //To track the number of attempts made for login
+        bool TrackLoginAttempts(string email)
+        {
+            Emails.Add(email);
+            List<string> list = Emails.Where(e => e == email).ToList();
+            if (list.Count > 3)
+                return true;
+
+            return false;
         }
 
         //To set the data for the collections
