@@ -107,7 +107,7 @@ namespace CloudOS.ViewModels
             Debug.WriteLine(client.Name + " was declined.");
         }
 
-        void Login()
+        async void Login()
         {
             if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
             {
@@ -129,7 +129,8 @@ namespace CloudOS.ViewModels
                 Password = null;
             }
             else
-                Debug.WriteLine("Please fill in your username and/or the password.");
+                if (Application.Current != null && Application.Current.MainPage != null)
+                    await Application.Current.MainPage.DisplayAlert("Admin", "Please fill in your username and/or the password.", "Okay");
 
                 
         }

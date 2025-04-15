@@ -204,10 +204,12 @@ namespace CloudOS.ViewModels
                 Memory = null;
                 Cpus = null;
 
-                Debug.WriteLine("Successfully created the vm.");
+                if (Application.Current != null && Application.Current.MainPage != null)
+                    await Application.Current.MainPage.DisplayAlert("Virtual Machine", "Successfully created the vm.", "Okay");
             }
             else
-                Debug.WriteLine("Unsuccessfully created the vm.");
+                if (Application.Current != null && Application.Current.MainPage != null)
+                    await Application.Current.MainPage.DisplayAlert("Client", "Unsuccessfully created the vm.", "Okay");
         }
 
         async void DeleteVM(Virtual_Machine vm)
@@ -223,29 +225,34 @@ namespace CloudOS.ViewModels
                 //Remove from the list
                 Machines.Remove(vm);
 
-                Debug.WriteLine("VM was deleted: " + vm.Name);
+                if (Application.Current != null && Application.Current.MainPage != null)
+                    await Application.Current.MainPage.DisplayAlert("Virtual Machine Deletion", "VM was deleted: " + vm.Name, "Okay");
+
             }
             else
-                Debug.WriteLine("Failed to delete VM: " + vm.Name);
+                if (Application.Current != null && Application.Current.MainPage != null)
+                    await Application.Current.MainPage.DisplayAlert("Virtual Machine Deletion" ,"Failed to delete VM: " + vm.Name, "Okay");
 
         }
 
-        void RunVM(Virtual_Machine vm)
+        async void RunVM(Virtual_Machine vm)
         {
             //Simply run through VB
             if (vm.Name != null)
                 vbManager.StartVM(vm.Name);
             else
-                Debug.WriteLine("The vm name was null.");
+                if (Application.Current != null && Application.Current.MainPage != null)
+                    await Application.Current.MainPage.DisplayAlert("Virtual Machine" ,"The vm name was null.", "Okay");
         }
 
-        void SaveVM(Virtual_Machine vm)
+        async void SaveVM(Virtual_Machine vm)
         {
             //Save the current state of the vm and close it
             if(vm.Name != null)
                 vbManager.SaveVM(vm.Name);
             else
-                Debug.WriteLine("The vm name was null.");
+                if (Application.Current != null && Application.Current.MainPage != null)
+                    await Application.Current.MainPage.DisplayAlert("Virtual Machine", "The vm name was null.", "Okay");
         }
 
         async void AddTenant()
@@ -266,13 +273,16 @@ namespace CloudOS.ViewModels
                     //Refresh the list
                     Tenants = new ObservableCollection<Tenant>(await dbManager.ReturnTenantsById(Client_id));
 
-                    Debug.WriteLine("Added tenant successfully");
+                    if (Application.Current != null && Application.Current.MainPage != null)
+                        await Application.Current.MainPage.DisplayAlert("Tenant", "Added tenant successfully", "Okay");
                 }
                 else
-                    Debug.WriteLine("Added tenant unsuccessfully");                
+                    if (Application.Current != null && Application.Current.MainPage != null)
+                        await Application.Current.MainPage.DisplayAlert("Tenant", "Added tenant unsuccessfully", "Okay");                
             }
             else
-                Debug.WriteLine("Please fill in the TenantName and Select an option");
+                if (Application.Current != null && Application.Current.MainPage != null)
+                    await Application.Current.MainPage.DisplayAlert("Tenant", "Please fill in the Tenant Name and Select an option", "Okay");
 
         }
 
@@ -284,7 +294,8 @@ namespace CloudOS.ViewModels
                 Tenants.Remove(tenant);
             }
             else
-                Debug.WriteLine("Failed to delete.");
+                if (Application.Current != null && Application.Current.MainPage != null)
+                    await Application.Current.MainPage.DisplayAlert("Tenant", "Failed to delete.", "Okay");
         }
 
         //Login method
@@ -310,14 +321,14 @@ namespace CloudOS.ViewModels
                     //Initial layout to be tenants
                     TenantLayout = true;
                     SelectedOption = "Tenants";
-
-                    Debug.WriteLine("Login successful.");
                 }
                 else
-                    Debug.WriteLine("Failed to login.");
+                    if (Application.Current != null && Application.Current.MainPage != null)
+                        await Application.Current.MainPage.DisplayAlert("Client", "Failed to login. Incorrect credentials or please contact admin.", "Okay");
             }
             else
-                Debug.WriteLine("Failed to login. Fill in the username and/or password.");
+                if (Application.Current != null && Application.Current.MainPage != null)
+                    await Application.Current.MainPage.DisplayAlert("Client", "Failed to login. Fill in the username and/or password.", "Okay");
         }
 
         //Registration method
@@ -343,7 +354,8 @@ namespace CloudOS.ViewModels
                         //Add to the database
                         if (await dbManager.AddPerson(person, Password))
                         {
-                            Debug.WriteLine("Successfully registered. Please wait for approval.");
+                            if (Application.Current != null && Application.Current.MainPage != null)
+                                await Application.Current.MainPage.DisplayAlert("Client", "Successfully registered. Please wait for approval.", "Okay");
 
                             //Clear out the entries
                             Text1 = null;
@@ -355,7 +367,8 @@ namespace CloudOS.ViewModels
                             Password = null;
                         }
                         else
-                            Debug.WriteLine("Registration was unsuccessful.");
+                            if (Application.Current != null && Application.Current.MainPage != null)
+                                await Application.Current.MainPage.DisplayAlert("Client", "Registration was unsuccessful.", "Okay");
                     }
                     else
                     {
@@ -374,7 +387,8 @@ namespace CloudOS.ViewModels
                         //Add to the DB
                         if (await dbManager.AddCompany(company, Password))
                         {
-                            Debug.WriteLine("Successfully registered. Please wait for approval.");
+                            if (Application.Current != null && Application.Current.MainPage != null)
+                                await Application.Current.MainPage.DisplayAlert("Client", "Successfully registered. Please wait for approval.", "Okay");
 
                             //Clear out the entries
                             Text1 = null;
@@ -386,12 +400,14 @@ namespace CloudOS.ViewModels
                             Password = null;
                         }
                         else
-                            Debug.WriteLine("Registration was unsuccessful.");
+                            if (Application.Current != null && Application.Current.MainPage != null)
+                                await Application.Current.MainPage.DisplayAlert("Client", "Registration was unsuccessful.", "Okay");
 
                     }
                 }
                 else
-                    Debug.WriteLine("Please complete all the entries.");
+                    if (Application.Current != null && Application.Current.MainPage != null)
+                        await Application.Current.MainPage.DisplayAlert("Client", "Please complete all the entries.", "Okay");
 
             
         }
@@ -447,7 +463,8 @@ namespace CloudOS.ViewModels
                         VmLayout = true;
                     }
                     else
-                        Debug.WriteLine("Please login or select a tenant.");
+                        if (Application.Current != null && Application.Current.MainPage != null)
+                            _ = Application.Current.MainPage.DisplayAlert("Client", "Please login or select a tenant.", "Okay");
                     break;
                 case "Tenants":
                     if (Client_id > 0)
@@ -455,7 +472,8 @@ namespace CloudOS.ViewModels
                         TenantLayout = true;
                     }
                     else
-                        Debug.WriteLine("Please login.");
+                        if (Application.Current != null && Application.Current.MainPage != null)
+                        _ = Application.Current.MainPage.DisplayAlert("Client", "Please login.", "Okay");
                     break;
                 default:
                     LoginLayout = true;
